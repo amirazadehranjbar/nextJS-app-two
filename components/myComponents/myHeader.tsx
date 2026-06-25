@@ -5,11 +5,16 @@ import {ThemeToggle} from "./themeToggle";
 import DropdownMenuWithIcons from "./dropdownMenuWithIcons";
 import {useConvexAuth} from "convex/react";
 import {authClient} from "@/lib/auth-client";
+import {toast} from "sonner";
+import {useRouter} from "next/navigation";
 
 function MyHeader() {
 
 
-    const {isAuthenticated} = useConvexAuth()
+    const {isAuthenticated} = useConvexAuth();
+    const router = useRouter()
+
+
     return (
         <header
             className="border-b-2 border-foreground bg-secondary w-full px-4 md:px-6 lg:px-8 py-3 flex items-center justify-between">
@@ -39,7 +44,18 @@ function MyHeader() {
                 {isAuthenticated
                     ?
                     (<button
-                        onClick={() => authClient.signOut()}
+                        onClick={() => authClient.signOut({
+                            fetchOptions: {
+                                onSuccess: () => {
+                                    toast.success("successfully signed out");
+
+                                    router.push("/auth/login");
+                                }
+                                , onError: (error) => {
+                                    toast.error(error.error.message)
+                                }
+                            }
+                        })}
                         className="my-btn-secondary"
                     >
                         sign out

@@ -9,18 +9,27 @@ import {standardSchemaResolver} from "@hookform/resolvers/standard-schema";
 import {LoginSchema} from "@/app/schemas/loginSchema";
 import {authClient} from "@/lib/auth-client";
 import z from "zod"
+import {toast} from "sonner";
+import {useRouter} from "next/navigation";
 
 function Login() {
 
     const form = useForm({
         resolver: standardSchemaResolver(LoginSchema),
         defaultValues: {email: "", password: ""}
-    })
+    });
 
-    const onSubmit = async (data :  z.infer<typeof LoginSchema>)=>{
+    const router = useRouter()
+
+    const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
         await authClient.signIn.email({
-            email : data.email ,
-            password : data.password
+            email: data.email,
+            password: data.password
+        }).then(() => {
+            toast.success("you successfully logged in");
+            router.push("/");
+        }).catch((error)=>{
+            toast.error(error)
         })
     }
 

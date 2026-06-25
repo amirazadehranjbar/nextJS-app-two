@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="commit 8" />
+    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="commit 8">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(auth-layout)/auth/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(auth-layout)/auth/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/loginSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/loginSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/myComponents/myHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/myComponents/myHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +33,65 @@
     &quot;accountId&quot;: &quot;a57e16a1-db9c-43c6-ad66-4651c4be29a3&quot;
   }
 }</component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="6.055942761530851E-162" />
+      <entry key="S2" value="5.056557683117359E-41" />
+      <entry key="S5" value="9.421814934548894E-17" />
+      <entry key="S10" value="1.6024774234194337E-8" />
+      <entry key="S30" value="0.009434599323964486" />
+      <entry key="S60" value="0.3772968368711014" />
+      <entry key="M2" value="2.927163097682617" />
+      <entry key="M5" value="11.445907579006866" />
+      <entry key="M10" value="18.703522474037396" />
+      <entry key="M15" value="22.31519852101826" />
+      <entry key="M30" value="27.40293773496182" />
+      <entry key="H1" value="31.229651430945882" />
+      <entry key="H2" value="33.78153884559167" />
+      <entry key="H4" value="35.29207060984978" />
+      <entry key="D1" value="36.700079589943044" />
+      <entry key="W1" value="36.95675810405848" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0000000000000002" />
+      <entry key="S10" value="1.000000023930424" />
+      <entry key="S30" value="1.0104934932239713" />
+      <entry key="S60" value="1.3198834057603555" />
+      <entry key="M2" value="3.0460202341030116" />
+      <entry key="M5" value="8.492748016713213" />
+      <entry key="M10" value="13.351621977632929" />
+      <entry key="M15" value="15.926770129324403" />
+      <entry key="M30" value="19.94247389362332" />
+      <entry key="H1" value="23.346449517461167" />
+      <entry key="H2" value="25.781042285906253" />
+      <entry key="H4" value="27.273440381161343" />
+      <entry key="D1" value="28.6940426530411" />
+      <entry key="W1" value="28.95581840166379" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="8.983968404611637E-9" />
+      <entry key="MS500" value="0.02458632641729893" />
+      <entry key="S2" value="0.39598014541782817" />
+      <entry key="S5" value="0.6903500558442287" />
+      <entry key="S10" value="0.8308731053240234" />
+      <entry key="S30" value="0.9594944609395448" />
+      <entry key="S60" value="1.6565433440142974" />
+      <entry key="M2" value="5.919699134225246" />
+      <entry key="M5" value="19.872367337261792" />
+      <entry key="M10" value="32.00169255129565" />
+      <entry key="M15" value="38.19870612579473" />
+      <entry key="M30" value="47.316882937884316" />
+      <entry key="H1" value="54.5584273927804" />
+      <entry key="H2" value="59.552427731072385" />
+      <entry key="H4" value="62.56001634898664" />
+      <entry key="D1" value="65.39313882208323" />
+      <entry key="W1" value="65.91243421837933" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
@@ -43,8 +109,9 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
+    "javascript.preferred.runtime.type.id": "node",
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
     "last_opened_file_path": "C:/Projects/nextJS/app-two",
@@ -101,6 +168,7 @@
       <workItem from="1782200351616" duration="738000" />
       <workItem from="1782202424915" duration="1293000" />
       <workItem from="1782203877225" duration="199000" />
+      <workItem from="1782365408707" duration="4254000" />
     </task>
     <task id="LOCAL-00001" summary="change project dir">
       <option name="closed" value="true" />

@@ -6,6 +6,7 @@ import React from "react";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 import {getToken} from "@/lib/auth-server";
+import {Toaster} from "@/components/ui/sonner";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -41,6 +42,7 @@ export default async function RootLayout({
             <main className="w-screen h-screen">
               {children}
             </main>
+            <Toaster closeButton />
           </ConvexClientProvider>
         </ThemeProvider>
       </body>
