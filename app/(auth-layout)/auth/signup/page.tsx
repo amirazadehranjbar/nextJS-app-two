@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, {useTransition} from 'react'
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {standardSchemaResolver} from "@hookform/resolvers/standard-schema";
 import {SignupSchema} from "@/app/schemas/signupSchema";
@@ -13,6 +13,7 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {authClient} from "@/lib/auth-client";
 import z from "zod";
+import {Loader2} from "lucide-react";
 
 function Signup() {
 
@@ -21,11 +22,15 @@ function Signup() {
         defaultValues: {name: "", email: "", password: ""}
     });
 
-    const onSubmit = async (data : z.infer<typeof  SignupSchema>)=>{
-        await authClient.signUp.email({
-            email : data.email ,
-            name : data.name ,
-            password : data.password
+    const [isPending, startTransition] = useTransition();
+
+    const onSubmit = (data: z.infer<typeof SignupSchema>) => {
+        startTransition(async () => {
+            await authClient.signUp.email({
+                email: data.email,
+                name: data.name,
+                password: data.password
+            })
         })
     }
 
@@ -47,7 +52,8 @@ function Signup() {
                             render={({field, fieldState}) => (
                                 <Field data-invalid={!!fieldState.error}>
                                     <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                                    <Input aria-invalid={fieldState.invalid} placeholder="amir" id={field.name} {...field} />
+                                    <Input aria-invalid={fieldState.invalid} placeholder="amir"
+                                           id={field.name} {...field} />
                                     <FieldError errors={fieldState.error ? [fieldState.error] : []}/>
                                 </Field>
                             )}
@@ -59,7 +65,8 @@ function Signup() {
                             render={({field, fieldState}) => (
                                 <Field data-invalid={!!fieldState.error}>
                                     <FieldLabel htmlFor={field.name}>Email</FieldLabel>
-                                    <Input aria-invalid={fieldState.invalid} placeholder="amir@gmail.com" id={field.name} {...field} />
+                                    <Input aria-invalid={fieldState.invalid} placeholder="amir@gmail.com"
+                                           id={field.name} {...field} />
                                     <FieldError errors={fieldState.error ? [fieldState.error] : []}/>
                                 </Field>
                             )}
@@ -72,12 +79,20 @@ function Signup() {
                             render={({field, fieldState}) => (
                                 <Field data-invalid={!!fieldState.error}>
                                     <FieldLabel htmlFor={field.name}>Password</FieldLabel>
-                                    <Input aria-invalid={fieldState.invalid} placeholder="****" id={field.name} {...field} />
+                                    <Input aria-invalid={fieldState.invalid} placeholder="****"
+                                           id={field.name} {...field} />
                                     <FieldError errors={fieldState.error ? [fieldState.error] : []}/>
                                 </Field>
                             )}
                         />
-                        <Button className="cursor-pointer">sign up</Button>
+                        <Button className="cursor-pointer" disabled={isPending}>{
+                            isPending
+                                ? (<>
+                                    <Loader2 className="size-4 animate-spin"/>
+                                    <span>loading....</span>
+                                </>)
+                                : (<span>sign up</span>)
+                        }</Button>
                     </FieldGroup>
                 </form>
             </CardContent>

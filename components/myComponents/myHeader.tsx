@@ -35,6 +35,9 @@ function MyHeader() {
                 <Link href="/blog" className="my-btn-primary">
                     blog
                 </Link>
+                <Link href="/create" className="my-btn-primary">
+                    create
+                </Link>
                 <Link href="/about" className="my-btn-primary">
                     about
                 </Link>
