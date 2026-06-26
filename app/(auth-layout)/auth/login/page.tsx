@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, {useTransition} from 'react'
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field";
 import {Controller, useForm} from "react-hook-form";
@@ -11,6 +11,7 @@ import {authClient} from "@/lib/auth-client";
 import z from "zod"
 import {toast} from "sonner";
 import {useRouter} from "next/navigation";
+import {Loader2} from "lucide-react";
 
 function Login() {
 
@@ -19,17 +20,21 @@ function Login() {
         defaultValues: {email: "", password: ""}
     });
 
-    const router = useRouter()
+    const router = useRouter();
+
+    const [isPending, startTransition] = useTransition();
 
     const onSubmit = async (data: z.infer<typeof LoginSchema>) => {
-        await authClient.signIn.email({
-            email: data.email,
-            password: data.password
-        }).then(() => {
-            toast.success("you successfully logged in");
-            router.push("/");
-        }).catch((error)=>{
-            toast.error(error)
+        startTransition(async () => {
+            await authClient.signIn.email({
+                email: data.email,
+                password: data.password
+            }).then(() => {
+                toast.success("you successfully logged in");
+                router.push("/");
+            }).catch((error) => {
+                toast.error(error)
+            })
         })
     }
 
@@ -68,7 +73,11 @@ function Login() {
                                 </Field>
                             )}
                         />
-                        <Button>log in</Button>
+                        <Button disabled={isPending}>
+                            {isPending
+                                ? (<Loader2 className="size-4 animate-spin"/>)
+                                : (<span>log in</span>)}
+                        </Button>
                     </FieldGroup>
                 </form>
             </CardContent>
