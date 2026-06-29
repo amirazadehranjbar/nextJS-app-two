@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="define posts schema">
-      <change afterPath="$PROJECT_DIR$/convex/posts.ts" afterDir="false" />
+    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="add post (blogArticle) table">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/_generated/api.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/_generated/api.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convex/posts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/posts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convex/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/schema.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,60 +46,60 @@
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000000313864754" />
-      <entry key="S2" value="1.0208457285462271" />
-      <entry key="S5" value="1.3201265050974438" />
-      <entry key="S10" value="1.7992564281220997" />
-      <entry key="S30" value="2.4727860603476435" />
-      <entry key="S60" value="2.716213034996489" />
-      <entry key="M2" value="2.8531169694280596" />
-      <entry key="M5" value="3.2414666217235197" />
-      <entry key="M10" value="5.799570152430441" />
-      <entry key="M15" value="9.216513929151397" />
-      <entry key="M30" value="19.075262874982684" />
-      <entry key="H1" value="39.43135699910564" />
-      <entry key="H2" value="78.84744455201455" />
-      <entry key="H4" value="127.45797004116679" />
-      <entry key="D1" value="204.179311879943" />
-      <entry key="W1" value="222.7138643801985" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.000087383698012" />
+      <entry key="S5" value="1.044932862813509" />
+      <entry key="S10" value="1.36558458726054" />
+      <entry key="S30" value="2.486760162298273" />
+      <entry key="S60" value="3.149501398114934" />
+      <entry key="M2" value="3.8575845198081438" />
+      <entry key="M5" value="5.783371757020454" />
+      <entry key="M10" value="9.369626153155835" />
+      <entry key="M15" value="13.60955954388105" />
+      <entry key="M30" value="26.892162294907862" />
+      <entry key="H1" value="51.154677671717366" />
+      <entry key="H2" value="94.08151414022765" />
+      <entry key="H4" value="149.82409464541772" />
+      <entry key="D1" value="245.36710327818076" />
+      <entry key="W1" value="269.65066968107305" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="7.204731088595639E-260" />
-      <entry key="S5" value="5.4854304916178955E-104" />
-      <entry key="S10" value="6.0201853878726006E-52" />
-      <entry key="S30" value="3.7666472918060995E-17" />
-      <entry key="S60" value="2.0724511158507322E-8" />
-      <entry key="M2" value="5.202997718182068E-4" />
-      <entry key="M5" value="0.25305379108382753" />
-      <entry key="M10" value="2.099050808753127" />
-      <entry key="M15" value="4.359793412219139" />
-      <entry key="M30" value="10.423056942714389" />
-      <entry key="H1" value="25.382004210601135" />
-      <entry key="H2" value="59.10012355771157" />
-      <entry key="H4" value="102.38010556255279" />
-      <entry key="D1" value="171.35452295904014" />
-      <entry key="W1" value="188.04142608856583" />
+      <entry key="MS100" value="1.0104971378692132E-13" />
+      <entry key="MS500" value="0.002559335220803716" />
+      <entry key="S2" value="0.31905849825555005" />
+      <entry key="S5" value="1.1004488311069118" />
+      <entry key="S10" value="1.8206930292544907" />
+      <entry key="S30" value="3.0143564191653134" />
+      <entry key="S60" value="3.7664595747313987" />
+      <entry key="M2" value="4.685255882978589" />
+      <entry key="M5" value="7.370068158919809" />
+      <entry key="M10" value="11.787587117513217" />
+      <entry key="M15" value="16.032840021594033" />
+      <entry key="M30" value="26.69336283793693" />
+      <entry key="H1" value="44.35376874826196" />
+      <entry key="H2" value="78.68836733183154" />
+      <entry key="H4" value="126.16882144398164" />
+      <entry key="D1" value="209.74100654314742" />
+      <entry key="W1" value="231.1594607495245" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.41179550863378656" />
-      <entry key="MS500" value="0.8374065153996184" />
-      <entry key="S2" value="0.9759937025636184" />
-      <entry key="S5" value="1.2917597921540043" />
-      <entry key="S10" value="1.776148923317946" />
-      <entry key="S30" value="2.460719229733099" />
-      <entry key="S60" value="2.709374235590092" />
-      <entry key="M2" value="2.8499815912820523" />
-      <entry key="M5" value="3.4894734741888933" />
-      <entry key="M10" value="7.878676093073548" />
-      <entry key="M15" value="13.546896553725396" />
-      <entry key="M30" value="29.462663166395643" />
-      <entry key="H1" value="64.777272934322" />
-      <entry key="H2" value="137.9128389850525" />
-      <entry key="H4" value="229.8105883325587" />
-      <entry key="D1" value="375.5266146432852" />
-      <entry key="W1" value="410.75416831204456" />
+      <entry key="MS100" value="0.004581386520437031" />
+      <entry key="MS500" value="0.34087919888534673" />
+      <entry key="S2" value="0.938968325965969" />
+      <entry key="S5" value="1.7748365377450794" />
+      <entry key="S10" value="2.867039679814351" />
+      <entry key="S30" value="5.312220407868826" />
+      <entry key="S60" value="6.785842097571778" />
+      <entry key="M2" value="8.420682235342477" />
+      <entry key="M5" value="13.037091190242611" />
+      <entry key="M10" value="21.062339916119466" />
+      <entry key="M15" value="29.559575041589294" />
+      <entry key="M30" value="53.51884032033105" />
+      <entry key="H1" value="95.45382064366831" />
+      <entry key="H2" value="172.72435952938497" />
+      <entry key="H4" value="275.9585037793406" />
+      <entry key="D1" value="455.0990762134378" />
+      <entry key="W1" value="500.80872067129843" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -183,7 +184,8 @@
       <workItem from="1782483159880" duration="3482000" />
       <workItem from="1782624484010" duration="4941000" />
       <workItem from="1782712036922" duration="1333000" />
-      <workItem from="1782714408060" duration="3278000" />
+      <workItem from="1782714408060" duration="3402000" />
+      <workItem from="1782738188555" duration="4220000" />
     </task>
     <task id="LOCAL-00001" summary="change project dir">
       <option name="closed" value="true" />
@@ -273,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782717932355</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add post (blogArticle) table">
+      <option name="closed" value="true" />
+      <created>1782719960458</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1782719960458</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,6 +300,7 @@
     <MESSAGE value="add inputs and controllers to create post page 2" />
     <MESSAGE value="add inputs and controllers to create post page 3" />
     <MESSAGE value="define posts schema" />
-    <option name="LAST_COMMIT_MESSAGE" value="define posts schema" />
+    <MESSAGE value="add post (blogArticle) table" />
+    <option name="LAST_COMMIT_MESSAGE" value="add post (blogArticle) table" />
   </component>
 </project>

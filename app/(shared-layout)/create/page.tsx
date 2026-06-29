@@ -1,24 +1,37 @@
 "use client"
-import React from 'react'
+import React, {useTransition} from 'react'
 import {Card, CardContent, CardDescription, CardTitle} from "@/components/ui/card";
 import {Controller, useForm} from "react-hook-form";
 import {standardSchemaResolver} from "@hookform/resolvers/standard-schema";
 import {PostSchema} from "@/app/schemas/postSchema";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field";
 import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
-import {Textarea} from "@/components/ui/textarea";
+import {useMutation} from "convex/react";
+import {api} from "@/convex/_generated/api";
+import z from "zod"
+import {toast} from "sonner";
+import {Loader2} from "lucide-react";
 
-function CreatePage() {
+function CreatePost() {
 
     const form = useForm({
         resolver: standardSchemaResolver(PostSchema),
         defaultValues: {title: "", content: ""}
     });
+    const [isPending, startTransition] = useTransition();
 
+    const postMutation = useMutation(api.posts.createPost)
 
-    const onSubmit = () => {
-        console.log("submmit");
+    const onSubmit = (values: z.infer<typeof PostSchema>) => {
+        startTransition(()=>{
+            postMutation({
+                title: values.title,
+                body: values.content,
+
+            }).then(r => toast.success("are article posted successfully")).catch(reason => {
+                toast.error(reason)
+            })
+        })
     }
 
 
@@ -70,7 +83,10 @@ function CreatePage() {
                         </FieldGroup>
 
                         <Button className="w-full mt-4" type="submit">
-                            post
+                            {isPending
+                                ? (<Loader2 className="size-4"/>)
+                                : (<p>post</p>)
+                            }
                         </Button>
 
                     </form>
@@ -81,4 +97,4 @@ function CreatePage() {
     )
 }
 
-export default CreatePage
+export default CreatePost
