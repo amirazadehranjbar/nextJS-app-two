@@ -11,6 +11,7 @@ import {api} from "@/convex/_generated/api";
 import z from "zod"
 import {toast} from "sonner";
 import {Loader2} from "lucide-react";
+import {useRouter} from "next/navigation";
 
 function CreatePost() {
 
@@ -18,6 +19,8 @@ function CreatePost() {
         resolver: standardSchemaResolver(PostSchema),
         defaultValues: {title: "", content: ""}
     });
+
+    const router = useRouter();
     const [isPending, startTransition] = useTransition();
 
     const postMutation = useMutation(api.posts.createPost)
@@ -28,8 +31,11 @@ function CreatePost() {
                 title: values.title,
                 body: values.content,
 
-            }).then(r => toast.success("are article posted successfully")).catch(reason => {
-                toast.error(reason)
+            }).then(r => {
+                toast.success("are article posted successfully");
+                router.push("/");
+            }).catch(reason => {
+                toast.error(reason);
             })
         })
     }
@@ -82,7 +88,7 @@ function CreatePost() {
                             />
                         </FieldGroup>
 
-                        <Button className="w-full mt-4" type="submit">
+                        <Button className="w-full mt-4" type="submit" disabled={isPending}>
                             {isPending
                                 ? (<Loader2 className="size-4"/>)
                                 : (<p>post</p>)
