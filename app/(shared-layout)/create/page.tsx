@@ -33,7 +33,7 @@ function CreatePage() {
             </div>
 
             <Card className="w-10/12 p-3 mt-5 border shadow-md">
-                <CardTitle className="text-chart-1">new post</CardTitle>
+                <CardTitle className="text-chart-1 text-center">new post</CardTitle>
                 <CardDescription>post your blog here</CardDescription>
                 <CardContent>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -45,9 +45,9 @@ function CreatePage() {
                                 render={({field, fieldState}) => (
                                     <Field data-invalid={!!fieldState.error}>
                                         <FieldLabel htmlFor={field.name}>Title</FieldLabel>
-                                        <Input aria-invalid={fieldState.invalid} placeholder="title"
+                                        <input aria-invalid={fieldState.invalid} placeholder="title"
                                                id={field.name} {...field}
-                                               className="p-2 border-2 outline-0 border-border focus:border-ring/30 mb-2 shadow-lg shadow-chart-4"/>
+                                               className="p-2 border-2 outline-none border-border mb-2 shadow-lg shadow-chart-4 rounded-md focus:border-ring/50"/>
                                         <FieldError errors={fieldState.error ? [fieldState.error] : []}/>
                                     </Field>
                                 )}
@@ -60,16 +60,16 @@ function CreatePage() {
                                 render={({field, fieldState}) => (
                                     <Field data-invalid={!!fieldState.error}>
                                         <FieldLabel htmlFor={field.name}>Content</FieldLabel>
-                                        <Textarea aria-invalid={fieldState.invalid} placeholder="title"
+                                        <textarea aria-invalid={fieldState.invalid} placeholder="title"
                                                   id={field.name} {...field}
-                                                  className="p-2 border-2 outline-0 border-border mb-2 shadow-lg shadow-chart-4"/>
+                                                  className="p-2 border-2 outline-none border-border mb-2 shadow-lg shadow-chart-4 rounded-md focus:border-ring/50"/>
                                         <FieldError errors={fieldState.error ? [fieldState.error] : []}/>
                                     </Field>
                                 )}
                             />
                         </FieldGroup>
 
-                        <Button className="w-full" type="submit">
+                        <Button className="w-full mt-4" type="submit">
                             post
                         </Button>
 
