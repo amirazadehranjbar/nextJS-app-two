@@ -23,8 +23,8 @@ function CreatePost() {
     const postMutation = useMutation(api.posts.createPost)
 
     const onSubmit = (values: z.infer<typeof PostSchema>) => {
-        startTransition(()=>{
-            postMutation({
+        startTransition(async ()=>{
+            await postMutation({
                 title: values.title,
                 body: values.content,
 
