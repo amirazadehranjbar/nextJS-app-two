@@ -3,7 +3,7 @@ import React, {useTransition} from 'react'
 import {Card, CardContent, CardDescription, CardTitle} from "@/components/ui/card";
 import {Controller, useForm} from "react-hook-form";
 import {standardSchemaResolver} from "@hookform/resolvers/standard-schema";
-import {PostSchema} from "@/app/schemas/postSchema";
+import {postSchema} from "@/app/schemas/postSchema";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field";
 import {Button} from "@/components/ui/button";
 import {useMutation} from "convex/react";
@@ -16,7 +16,7 @@ import {useRouter} from "next/navigation";
 function CreatePost() {
 
     const form = useForm({
-        resolver: standardSchemaResolver(PostSchema),
+        resolver: standardSchemaResolver(postSchema),
         defaultValues: {title: "", content: ""}
     });
 
@@ -25,7 +25,7 @@ function CreatePost() {
 
     const postMutation = useMutation(api.posts.createPost)
 
-    const onSubmit = (values: z.infer<typeof PostSchema>) => {
+    const onSubmit = (values: z.infer<typeof postSchema>) => {
         startTransition(async ()=>{
             await postMutation({
                 title: values.title,
