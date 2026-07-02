@@ -11,7 +11,8 @@ import {api} from "@/convex/_generated/api";
 import z from "zod"
 import {toast} from "sonner";
 import {Loader2} from "lucide-react";
-import {useRouter} from "next/navigation";
+import {unstable_rethrow, useRouter} from "next/navigation";
+import {createPost} from "@/app/(shared-layout)/create/actions";
 
 function CreatePost() {
 
@@ -25,18 +26,15 @@ function CreatePost() {
 
     const postMutation = useMutation(api.posts.createPost)
 
-    const onSubmit = (values: z.infer<typeof postSchema>) => {
-        startTransition(async ()=>{
-            await postMutation({
-                title: values.title,
-                body: values.content,
-
-            }).then(r => {
-                toast.success("are article posted successfully");
-                router.push("/");
-            }).catch(reason => {
-                toast.error(reason);
-            })
+    const onSubmit = async (values: z.infer<typeof postSchema>) => {
+        startTransition(async () => {
+            try {
+                await createPost(values)
+                toast.success("Article posted successfully")
+            } catch (e) {
+                unstable_rethrow(e)          // lets the redirect through untouched
+                toast.error(e instanceof Error ? e.message : "Something went wrong")
+            }
         })
     }
 
