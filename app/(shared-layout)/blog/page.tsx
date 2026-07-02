@@ -1,9 +1,22 @@
 import React from 'react'
+import { fetchQuery } from "convex/nextjs"
+import { api } from "@/convex/_generated/api"
 
-function Blog() {
+
+async function blogPage() {
+
+    const posts = await fetchQuery(api.posts.getPosts)
+
     return (
-        <div>Blog</div>
+        <div>
+            {posts.map((post) => (
+                <div key={post._id}>
+                    <h2>{post.title}</h2>
+                    <p>{post.body}</p>
+                </div>
+            ))}
+        </div>
     )
 }
 
-export default Blog
+export default blogPage

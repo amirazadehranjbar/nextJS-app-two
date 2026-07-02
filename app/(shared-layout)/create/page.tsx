@@ -6,13 +6,12 @@ import {standardSchemaResolver} from "@hookform/resolvers/standard-schema";
 import {postSchema} from "@/app/schemas/postSchema";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field";
 import {Button} from "@/components/ui/button";
-import {useMutation} from "convex/react";
 import {api} from "@/convex/_generated/api";
 import z from "zod"
 import {toast} from "sonner";
 import {Loader2} from "lucide-react";
 import {unstable_rethrow, useRouter} from "next/navigation";
-import {createPost} from "@/app/(shared-layout)/create/actions";
+import {createPostAction} from "@/app/(shared-layout)/create/actions";
 
 function CreatePost() {
 
@@ -24,12 +23,11 @@ function CreatePost() {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
 
-    const postMutation = useMutation(api.posts.createPost)
 
     const onSubmit = async (values: z.infer<typeof postSchema>) => {
         startTransition(async () => {
             try {
-                await createPost(values)
+                await createPostAction(values)
                 toast.success("Article posted successfully")
             } catch (e) {
                 unstable_rethrow(e)          // lets the redirect through untouched

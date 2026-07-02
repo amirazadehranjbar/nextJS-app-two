@@ -8,7 +8,7 @@ import {postSchema} from "@/app/schemas/postSchema"
 import {redirect} from "next/navigation";
 
 
-export async function createPost(values: z.infer<typeof postSchema>) {
+export async function createPostAction(values: z.infer<typeof postSchema>) {
 
 
     await fetchAuthMutation(api.posts.createPost, {
@@ -17,5 +17,10 @@ export async function createPost(values: z.infer<typeof postSchema>) {
     })
 
     revalidatePath('/')
+    revalidatePath('/blog')
     redirect('/')
+}
+
+export async function getPostsAction (){
+
 }

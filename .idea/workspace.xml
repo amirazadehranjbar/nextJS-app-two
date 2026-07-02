@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="add post function : changed it to server side just for testing">
-      <change afterPath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" afterDir="false" />
+    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="refactor(create-post): move post creation to a server action&#10;&#10;- Replace client-side authClient.getSession() in actions.ts with&#10;  fetchAuthMutation from lib/auth-server, since authClient relies on&#10;  relative URLs that only resolve in the browser and crash on the server&#10;- Let the Convex posts.createPost mutation be the single source of truth&#10;  for the auth check (authComponent.safeGetAuthUser) instead of&#10;  duplicating it in the server action&#10;- Add revalidatePath('/') to invalidate the stale homepage cache after&#10;  a new post is created&#10;- Add redirect('/') to navigate the user after a successful post,&#10;  replacing the client-side router.push('/')&#10;- Handle redirect's internal NEXT_REDIRECT throw correctly on the&#10;  client using unstable_rethrow, so it isn't caught as an app error&#10;- Wrap the submit handler in startTransition with try/catch for proper&#10;  pending state and error toasts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(shared-layout)/blog/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/blog/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/actions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/auth-server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/auth-server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/create-blog/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/convex/posts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/posts.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,61 +47,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.7169776240079138" />
-      <entry key="MS500" value="1.9356234978314002" />
-      <entry key="S2" value="1.9835020740262483" />
-      <entry key="S5" value="1.9933678773166053" />
-      <entry key="S10" value="1.9966784222188245" />
-      <entry key="S30" value="1.99889157926368" />
-      <entry key="S60" value="1.9994456359721022" />
-      <entry key="M2" value="1.9997227796600046" />
-      <entry key="M5" value="2.000441021456747" />
-      <entry key="M10" value="2.1473484983677467" />
-      <entry key="M15" value="3.066656417635598" />
-      <entry key="M30" value="11.174036748883424" />
-      <entry key="H1" value="35.58666717409269" />
-      <entry key="H2" value="83.72029285657325" />
-      <entry key="H4" value="152.13855501503105" />
-      <entry key="D1" value="285.5099760994357" />
-      <entry key="W1" value="322.2981355753542" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000721116550955" />
+      <entry key="S2" value="1.1406599698995215" />
+      <entry key="S5" value="1.6849981466272332" />
+      <entry key="S10" value="2.168551959022688" />
+      <entry key="S30" value="2.6713883768840705" />
+      <entry key="S60" value="2.8283749802104095" />
+      <entry key="M2" value="2.935140782287746" />
+      <entry key="M5" value="3.499726860223616" />
+      <entry key="M10" value="4.765138316154957" />
+      <entry key="M15" value="5.921700295801313" />
+      <entry key="M30" value="10.146631576453096" />
+      <entry key="H1" value="26.080863604943712" />
+      <entry key="H2" value="67.91016865282957" />
+      <entry key="H4" value="137.05696400664084" />
+      <entry key="D1" value="287.8084475902334" />
+      <entry key="W1" value="331.87833056121593" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="4.049412273865892E-4" />
-      <entry key="MS500" value="0.2180852133136652" />
-      <entry key="S2" value="0.979786791653285" />
-      <entry key="S5" value="1.4757274816443022" />
-      <entry key="S10" value="1.7124910532786857" />
-      <entry key="S30" value="1.8978071956580105" />
-      <entry key="S60" value="1.9480592212191046" />
-      <entry key="M2" value="1.9738145782797845" />
-      <entry key="M5" value="1.9901268499828006" />
-      <entry key="M10" value="2.118226744120993" />
-      <entry key="M15" value="2.799818390344115" />
-      <entry key="M30" value="8.497801285121206" />
-      <entry key="H1" value="25.656188106649896" />
-      <entry key="H2" value="61.68014370140966" />
-      <entry key="H4" value="116.66318498973551" />
-      <entry key="D1" value="228.78985607312296" />
-      <entry key="W1" value="260.25263497336914" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="8.224206627189289E-133" />
+      <entry key="S5" value="2.603171264156907E-53" />
+      <entry key="S10" value="8.709219004858866E-27" />
+      <entry key="S30" value="4.266064229223771E-9" />
+      <entry key="S60" value="1.1308493792960287E-4" />
+      <entry key="M2" value="0.01842507350767348" />
+      <entry key="M5" value="0.40523836217619674" />
+      <entry key="M10" value="1.2750015596228033" />
+      <entry key="M15" value="2.0499258778368006" />
+      <entry key="M30" value="4.9645506774600765" />
+      <entry key="H1" value="16.161855101979885" />
+      <entry key="H2" value="47.10508125124814" />
+      <entry key="H4" value="101.77331710653974" />
+      <entry key="D1" value="226.83947832437045" />
+      <entry key="W1" value="264.10947679886243" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9037621183503949" />
-      <entry key="MS500" value="1.6704489407925973" />
-      <entry key="S2" value="2.559378515623812" />
-      <entry key="S5" value="3.2197990212334666" />
-      <entry key="S10" value="3.56231147988049" />
-      <entry key="S30" value="3.841790910869396" />
-      <entry key="S60" value="3.919232207347848" />
-      <entry key="M2" value="3.959190328720887" />
-      <entry key="M5" value="3.9847740834769745" />
-      <entry key="M10" value="4.262264318165426" />
-      <entry key="M15" value="5.86253066221686" />
-      <entry key="M30" value="19.660797521895816" />
-      <entry key="H1" value="61.220813776290356" />
-      <entry key="H2" value="145.37105150338263" />
-      <entry key="H4" value="268.7733741753538" />
-      <entry key="D1" value="514.2905923546747" />
-      <entry key="W1" value="582.5492721268532" />
+      <entry key="MS100" value="1.2143081889954894E-21" />
+      <entry key="MS500" value="9.022665834773043E-5" />
+      <entry key="S2" value="0.1883338069218868" />
+      <entry key="S5" value="0.9672369952213113" />
+      <entry key="S10" value="1.695603126043491" />
+      <entry key="S30" value="2.477760260667599" />
+      <entry key="S60" value="2.726278076685229" />
+      <entry key="M2" value="2.9008763712102668" />
+      <entry key="M5" value="3.8821977300948634" />
+      <entry key="M10" value="6.027164588179737" />
+      <entry key="M15" value="7.961997088315058" />
+      <entry key="M30" value="15.103250323519923" />
+      <entry key="H1" value="42.229187200485576" />
+      <entry key="H2" value="114.99333562034452" />
+      <entry key="H4" value="238.80586998284835" />
+      <entry key="D1" value="514.6388272442075" />
+      <entry key="W1" value="595.986295770664" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -112,30 +113,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Projects/nextJS/app-two&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Projects\\nextJS\\app-two\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.preferred.runtime.type.id": "node",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "last_opened_file_path": "C:/Projects/nextJS/app-two",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "settings.editor.selected.configurable": "settings.sync",
+    "ts.external.directory.path": "C:\\Projects\\nextJS\\app-two\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Projects\nextJS\app-two" />
@@ -191,7 +193,9 @@
       <workItem from="1782889835622" duration="1740000" />
       <workItem from="1782912632150" duration="3550000" />
       <workItem from="1782922068193" duration="71000" />
-      <workItem from="1782969481141" duration="5474000" />
+      <workItem from="1782969481141" duration="9486000" />
+      <workItem from="1783002787647" duration="61000" />
+      <workItem from="1783002859169" duration="1927000" />
     </task>
     <task id="LOCAL-00001" summary="change project dir">
       <option name="closed" value="true" />
@@ -321,7 +325,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782921812885</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="refactor(create-post): move post creation to a server action&#10;&#10;- Replace client-side authClient.getSession() in actions.ts with&#10;  fetchAuthMutation from lib/auth-server, since authClient relies on&#10;  relative URLs that only resolve in the browser and crash on the server&#10;- Let the Convex posts.createPost mutation be the single source of truth&#10;  for the auth check (authComponent.safeGetAuthUser) instead of&#10;  duplicating it in the server action&#10;- Add revalidatePath('/') to invalidate the stale homepage cache after&#10;  a new post is created&#10;- Add redirect('/') to navigate the user after a successful post,&#10;  replacing the client-side router.push('/')&#10;- Handle redirect's internal NEXT_REDIRECT throw correctly on the&#10;  client using unstable_rethrow, so it isn't caught as an app error&#10;- Wrap the submit handler in startTransition with try/catch for proper&#10;  pending state and error toasts">
+      <option name="closed" value="true" />
+      <created>1782977258338</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1782977258338</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,6 +355,7 @@
     <MESSAGE value="add post action : add async and await" />
     <MESSAGE value="add post action : redirect user to home page" />
     <MESSAGE value="add post function : changed it to server side just for testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="add post function : changed it to server side just for testing" />
+    <MESSAGE value="refactor(create-post): move post creation to a server action&#10;&#10;- Replace client-side authClient.getSession() in actions.ts with&#10;  fetchAuthMutation from lib/auth-server, since authClient relies on&#10;  relative URLs that only resolve in the browser and crash on the server&#10;- Let the Convex posts.createPost mutation be the single source of truth&#10;  for the auth check (authComponent.safeGetAuthUser) instead of&#10;  duplicating it in the server action&#10;- Add revalidatePath('/') to invalidate the stale homepage cache after&#10;  a new post is created&#10;- Add redirect('/') to navigate the user after a successful post,&#10;  replacing the client-side router.push('/')&#10;- Handle redirect's internal NEXT_REDIRECT throw correctly on the&#10;  client using unstable_rethrow, so it isn't caught as an app error&#10;- Wrap the submit handler in startTransition with try/catch for proper&#10;  pending state and error toasts" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor(create-post): move post creation to a server action&#10;&#10;- Replace client-side authClient.getSession() in actions.ts with&#10;  fetchAuthMutation from lib/auth-server, since authClient relies on&#10;  relative URLs that only resolve in the browser and crash on the server&#10;- Let the Convex posts.createPost mutation be the single source of truth&#10;  for the auth check (authComponent.safeGetAuthUser) instead of&#10;  duplicating it in the server action&#10;- Add revalidatePath('/') to invalidate the stale homepage cache after&#10;  a new post is created&#10;- Add redirect('/') to navigate the user after a successful post,&#10;  replacing the client-side router.push('/')&#10;- Handle redirect's internal NEXT_REDIRECT throw correctly on the&#10;  client using unstable_rethrow, so it isn't caught as an app error&#10;- Wrap the submit handler in startTransition with try/catch for proper&#10;  pending state and error toasts" />
   </component>
 </project>
