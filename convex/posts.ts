@@ -1,6 +1,7 @@
 import {mutation, query} from "./_generated/server";
 import {ConvexError, v} from "convex/values";
 import {authComponent} from "./betterAuth/auth";
+import {toast} from "sonner";
 
 export const createPost = mutation({
     args: {
@@ -13,7 +14,8 @@ export const createPost = mutation({
         const user =await authComponent.safeGetAuthUser(ctx);
 
         if(!user){
-            throw new ConvexError("You must be logged in to perform this action.")
+            throw new ConvexError("You must be logged in to perform this action.");
+
         }
 
         const blogArticle = await ctx.db.insert("posts",

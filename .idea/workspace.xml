@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="refactor(create-post): move post creation to a server action&#10;&#10;- Replace client-side authClient.getSession() in actions.ts with&#10;  fetchAuthMutation from lib/auth-server, since authClient relies on&#10;  relative URLs that only resolve in the browser and crash on the server&#10;- Let the Convex posts.createPost mutation be the single source of truth&#10;  for the auth check (authComponent.safeGetAuthUser) instead of&#10;  duplicating it in the server action&#10;- Add revalidatePath('/') to invalidate the stale homepage cache after&#10;  a new post is created&#10;- Add redirect('/') to navigate the user after a successful post,&#10;  replacing the client-side router.push('/')&#10;- Handle redirect's internal NEXT_REDIRECT throw correctly on the&#10;  client using unstable_rethrow, so it isn't caught as an app error&#10;- Wrap the submit handler in startTransition with try/catch for proper&#10;  pending state and error toasts">
+    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="refactor(posts): standardize on server actions, add blog listing&#10;&#10;- Rename createPost -&gt; createPostAction for clarity, drop unused&#10;  Convex useMutation hook from create/page.tsx (server action was&#10;  already handling the mutation)&#10;- Remove unused app/api/create-blog/route.ts (dead route handler,&#10;  never called)&#10;- Add convex/posts.ts getPosts query and wire it into blog/page.tsx&#10;  via fetchQuery (server component, no client fetch)&#10;- revalidatePath('/blog') after createPostAction so new posts show&#10;  up immediately">
+      <change afterPath="$PROJECT_DIR$/public/test1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(shared-layout)/blog/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/blog/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/create-blog/route.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/convex/posts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/posts.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,61 +47,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0000721116550955" />
-      <entry key="S2" value="1.1406599698995215" />
-      <entry key="S5" value="1.6849981466272332" />
-      <entry key="S10" value="2.168551959022688" />
-      <entry key="S30" value="2.6713883768840705" />
-      <entry key="S60" value="2.8283749802104095" />
-      <entry key="M2" value="2.935140782287746" />
-      <entry key="M5" value="3.499726860223616" />
-      <entry key="M10" value="4.765138316154957" />
-      <entry key="M15" value="5.921700295801313" />
-      <entry key="M30" value="10.146631576453096" />
-      <entry key="H1" value="26.080863604943712" />
-      <entry key="H2" value="67.91016865282957" />
-      <entry key="H4" value="137.05696400664084" />
-      <entry key="D1" value="287.8084475902334" />
-      <entry key="W1" value="331.87833056121593" />
+      <entry key="MS100" value="1.1096698181709968E-26" />
+      <entry key="MS500" value="6.443722849299513E-6" />
+      <entry key="S2" value="0.05662366579607975" />
+      <entry key="S5" value="0.4570140847661423" />
+      <entry key="S10" value="1.1169288348539592" />
+      <entry key="S30" value="2.7692149077265356" />
+      <entry key="S60" value="4.222283474764343" />
+      <entry key="M2" value="6.261108109880501" />
+      <entry key="M5" value="9.209936375826386" />
+      <entry key="M10" value="11.363968317195729" />
+      <entry key="M15" value="13.77220823394347" />
+      <entry key="M30" value="23.233530413928328" />
+      <entry key="H1" value="42.89929615080157" />
+      <entry key="H2" value="83.14109360222751" />
+      <entry key="H4" value="156.17879016237126" />
+      <entry key="D1" value="351.17367840656283" />
+      <entry key="W1" value="415.7716032505826" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="8.224206627189289E-133" />
-      <entry key="S5" value="2.603171264156907E-53" />
-      <entry key="S10" value="8.709219004858866E-27" />
-      <entry key="S30" value="4.266064229223771E-9" />
-      <entry key="S60" value="1.1308493792960287E-4" />
-      <entry key="M2" value="0.01842507350767348" />
-      <entry key="M5" value="0.40523836217619674" />
-      <entry key="M10" value="1.2750015596228033" />
-      <entry key="M15" value="2.0499258778368006" />
-      <entry key="M30" value="4.9645506774600765" />
-      <entry key="H1" value="16.161855101979885" />
-      <entry key="H2" value="47.10508125124814" />
-      <entry key="H4" value="101.77331710653974" />
-      <entry key="D1" value="226.83947832437045" />
-      <entry key="W1" value="264.10947679886243" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0000000000002711" />
+      <entry key="S2" value="1.0007216065271058" />
+      <entry key="S5" value="1.0554168958744823" />
+      <entry key="S10" value="1.2445179443696273" />
+      <entry key="S30" value="2.043455340665087" />
+      <entry key="S60" value="3.078115292685197" />
+      <entry key="M2" value="4.307805271540901" />
+      <entry key="M5" value="5.647003716681488" />
+      <entry key="M10" value="6.815724291325668" />
+      <entry key="M15" value="8.763480637195006" />
+      <entry key="M30" value="16.791537552868984" />
+      <entry key="H1" value="32.064783910685776" />
+      <entry key="H2" value="61.55060038781731" />
+      <entry key="H4" value="117.07204053944008" />
+      <entry key="D1" value="273.69905903118047" />
+      <entry key="W1" value="326.88643126961676" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="1.2143081889954894E-21" />
-      <entry key="MS500" value="9.022665834773043E-5" />
-      <entry key="S2" value="0.1883338069218868" />
-      <entry key="S5" value="0.9672369952213113" />
-      <entry key="S10" value="1.695603126043491" />
-      <entry key="S30" value="2.477760260667599" />
-      <entry key="S60" value="2.726278076685229" />
-      <entry key="M2" value="2.9008763712102668" />
-      <entry key="M5" value="3.8821977300948634" />
-      <entry key="M10" value="6.027164588179737" />
-      <entry key="M15" value="7.961997088315058" />
-      <entry key="M30" value="15.103250323519923" />
-      <entry key="H1" value="42.229187200485576" />
-      <entry key="H2" value="114.99333562034452" />
-      <entry key="H4" value="238.80586998284835" />
-      <entry key="D1" value="514.6388272442075" />
-      <entry key="W1" value="595.986295770664" />
+      <entry key="MS100" value="0.0019803896089649" />
+      <entry key="MS500" value="0.2879763485104021" />
+      <entry key="S2" value="0.7842554704811634" />
+      <entry key="S5" value="1.3473632294656015" />
+      <entry key="S10" value="2.182565013576722" />
+      <entry key="S30" value="4.598192948438849" />
+      <entry key="S60" value="7.094548647079496" />
+      <entry key="M2" value="10.406247645594403" />
+      <entry key="M5" value="14.764737463778449" />
+      <entry key="M10" value="18.124119906311716" />
+      <entry key="M15" value="22.49074807141253" />
+      <entry key="M30" value="39.9878103460907" />
+      <entry key="H1" value="74.93252426782105" />
+      <entry key="H2" value="144.6630256875604" />
+      <entry key="H4" value="273.2235629076141" />
+      <entry key="D1" value="624.8620090153879" />
+      <entry key="W1" value="742.6562020858009" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -127,7 +127,7 @@
     "javascript.preferred.runtime.type.id": "node",
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
-    "last_opened_file_path": "C:/Projects/nextJS/app-two",
+    "last_opened_file_path": "C:/Projects/nextJS/app-two/public",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -140,6 +140,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Projects\nextJS\app-two\public" />
       <recent name="C:\Projects\nextJS\app-two" />
       <recent name="C:\Projects\nextJS\app-two\components" />
       <recent name="C:\Projects\nextJS\app-two\convex" />
@@ -164,7 +165,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.25134.101" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.26222.58" />
       </set>
     </attachedChunks>
   </component>
@@ -195,7 +196,10 @@
       <workItem from="1782922068193" duration="71000" />
       <workItem from="1782969481141" duration="9486000" />
       <workItem from="1783002787647" duration="61000" />
-      <workItem from="1783002859169" duration="1927000" />
+      <workItem from="1783002859169" duration="2541000" />
+      <workItem from="1783140617986" duration="251000" />
+      <workItem from="1783140880676" duration="1136000" />
+      <workItem from="1783142047824" duration="5694000" />
     </task>
     <task id="LOCAL-00001" summary="change project dir">
       <option name="closed" value="true" />
@@ -333,7 +337,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782977258338</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="refactor(posts): standardize on server actions, add blog listing&#10;&#10;- Rename createPost -&gt; createPostAction for clarity, drop unused&#10;  Convex useMutation hook from create/page.tsx (server action was&#10;  already handling the mutation)&#10;- Remove unused app/api/create-blog/route.ts (dead route handler,&#10;  never called)&#10;- Add convex/posts.ts getPosts query and wire it into blog/page.tsx&#10;  via fetchQuery (server component, no client fetch)&#10;- revalidatePath('/blog') after createPostAction so new posts show&#10;  up immediately">
+      <option name="closed" value="true" />
+      <created>1783005772607</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1783005772607</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,6 +368,7 @@
     <MESSAGE value="add post action : redirect user to home page" />
     <MESSAGE value="add post function : changed it to server side just for testing" />
     <MESSAGE value="refactor(create-post): move post creation to a server action&#10;&#10;- Replace client-side authClient.getSession() in actions.ts with&#10;  fetchAuthMutation from lib/auth-server, since authClient relies on&#10;  relative URLs that only resolve in the browser and crash on the server&#10;- Let the Convex posts.createPost mutation be the single source of truth&#10;  for the auth check (authComponent.safeGetAuthUser) instead of&#10;  duplicating it in the server action&#10;- Add revalidatePath('/') to invalidate the stale homepage cache after&#10;  a new post is created&#10;- Add redirect('/') to navigate the user after a successful post,&#10;  replacing the client-side router.push('/')&#10;- Handle redirect's internal NEXT_REDIRECT throw correctly on the&#10;  client using unstable_rethrow, so it isn't caught as an app error&#10;- Wrap the submit handler in startTransition with try/catch for proper&#10;  pending state and error toasts" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor(create-post): move post creation to a server action&#10;&#10;- Replace client-side authClient.getSession() in actions.ts with&#10;  fetchAuthMutation from lib/auth-server, since authClient relies on&#10;  relative URLs that only resolve in the browser and crash on the server&#10;- Let the Convex posts.createPost mutation be the single source of truth&#10;  for the auth check (authComponent.safeGetAuthUser) instead of&#10;  duplicating it in the server action&#10;- Add revalidatePath('/') to invalidate the stale homepage cache after&#10;  a new post is created&#10;- Add redirect('/') to navigate the user after a successful post,&#10;  replacing the client-side router.push('/')&#10;- Handle redirect's internal NEXT_REDIRECT throw correctly on the&#10;  client using unstable_rethrow, so it isn't caught as an app error&#10;- Wrap the submit handler in startTransition with try/catch for proper&#10;  pending state and error toasts" />
+    <MESSAGE value="refactor(posts): standardize on server actions, add blog listing&#10;&#10;- Rename createPost -&gt; createPostAction for clarity, drop unused&#10;  Convex useMutation hook from create/page.tsx (server action was&#10;  already handling the mutation)&#10;- Remove unused app/api/create-blog/route.ts (dead route handler,&#10;  never called)&#10;- Add convex/posts.ts getPosts query and wire it into blog/page.tsx&#10;  via fetchQuery (server component, no client fetch)&#10;- revalidatePath('/blog') after createPostAction so new posts show&#10;  up immediately" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor(posts): standardize on server actions, add blog listing&#10;&#10;- Rename createPost -&gt; createPostAction for clarity, drop unused&#10;  Convex useMutation hook from create/page.tsx (server action was&#10;  already handling the mutation)&#10;- Remove unused app/api/create-blog/route.ts (dead route handler,&#10;  never called)&#10;- Add convex/posts.ts getPosts query and wire it into blog/page.tsx&#10;  via fetchQuery (server component, no client fetch)&#10;- revalidatePath('/blog') after createPostAction so new posts show&#10;  up immediately" />
   </component>
 </project>

@@ -31,7 +31,8 @@ function CreatePost() {
                 toast.success("Article posted successfully")
             } catch (e) {
                 unstable_rethrow(e)          // lets the redirect through untouched
-                toast.error(e instanceof Error ? e.message : "Something went wrong")
+                //toast.error(e instanceof Error ? e.message : "Something went wrong")
+                toast.error("you must log in first")
             }
         })
     }

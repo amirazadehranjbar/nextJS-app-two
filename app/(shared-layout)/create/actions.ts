@@ -10,17 +10,18 @@ import {redirect} from "next/navigation";
 
 export async function createPostAction(values: z.infer<typeof postSchema>) {
 
+    const parsed = postSchema.safeParse(values);
+
+    if (!parsed.success){
+        throw new Error("some data not validated")
+    }
 
     await fetchAuthMutation(api.posts.createPost, {
-        title: values.title,
-        body: values.content,
+        title: parsed.data!.title,
+        body: parsed.data!.content,
     })
 
     revalidatePath('/')
     revalidatePath('/blog')
-    redirect('/')
-}
-
-export async function getPostsAction (){
-
+    redirect('/blog')
 }
