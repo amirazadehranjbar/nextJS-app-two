@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="blog loading - server side :&#10;handle delay from server by using Suspense react component">
-      <change afterPath="$PROJECT_DIR$/components/myComponents/expandable-profile-card.tsx" afterDir="false" />
+    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(shared-layout)/blog/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/blog/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/myComponents/expandable-profile-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/myComponents/expandable-profile-card.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,61 +44,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0001837463711276" />
-      <entry key="S2" value="1.1209816695706614" />
-      <entry key="S5" value="1.5387904647206416" />
-      <entry key="S10" value="1.9906089021805413" />
-      <entry key="S30" value="2.564501969520397" />
-      <entry key="S60" value="2.766361393773262" />
-      <entry key="M2" value="2.8950421672490574" />
-      <entry key="M5" value="3.882316737055511" />
-      <entry key="M10" value="8.356711297746466" />
-      <entry key="M15" value="13.640262886510245" />
-      <entry key="M30" value="26.222417749806272" />
-      <entry key="H1" value="45.49189773960521" />
-      <entry key="H2" value="83.58194204100128" />
-      <entry key="H4" value="158.8525413962428" />
-      <entry key="D1" value="418.36988833150167" />
-      <entry key="W1" value="520.8034893301458" />
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="1.4499259517620076E-107" />
+      <entry key="S5" value="2.6931959095637504E-43" />
+      <entry key="S10" value="7.294827549214329E-22" />
+      <entry key="S30" value="1.4746973137000732E-7" />
+      <entry key="S60" value="6.538167168943939E-4" />
+      <entry key="M2" value="0.05195718867038233" />
+      <entry key="M5" value="0.8222454946268968" />
+      <entry key="M10" value="2.21904447519707" />
+      <entry key="M15" value="3.4760589388319314" />
+      <entry key="M30" value="9.148557653353075" />
+      <entry key="H1" value="25.205137116082405" />
+      <entry key="H2" value="61.63739107870584" />
+      <entry key="H4" value="136.30924026223906" />
+      <entry key="D1" value="414.69995990266034" />
+      <entry key="W1" value="530.7994733104754" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="5.1213892375189955E-76" />
-      <entry key="MS500" value="8.747371442316086E-16" />
-      <entry key="S2" value="1.7418109968573905E-4" />
-      <entry key="S5" value="0.03716950841803871" />
-      <entry key="S10" value="0.2731182422130116" />
-      <entry key="S30" value="1.263446098073909" />
-      <entry key="S60" value="1.9285904815478636" />
-      <entry key="M2" value="2.411932008949176" />
-      <entry key="M5" value="3.8101420496983707" />
-      <entry key="M10" value="8.92672926653098" />
-      <entry key="M15" value="14.48613122462283" />
-      <entry key="M30" value="27.64124994055457" />
-      <entry key="H1" value="48.26029318018261" />
-      <entry key="H2" value="84.16065958316814" />
-      <entry key="H4" value="146.89382326585581" />
-      <entry key="D1" value="357.57867881017756" />
-      <entry key="W1" value="441.4207695916789" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.000000092075471" />
+      <entry key="S60" value="1.000554041358952" />
+      <entry key="M2" value="1.056182410364864" />
+      <entry key="M5" value="2.129407596228514" />
+      <entry key="M10" value="4.411790598937802" />
+      <entry key="M15" value="6.276654578915886" />
+      <entry key="M30" value="12.425996185347573" />
+      <entry key="H1" value="28.514099294714864" />
+      <entry key="H2" value="63.09209506939834" />
+      <entry key="H4" value="127.09263103742843" />
+      <entry key="D1" value="355.50864270792016" />
+      <entry key="W1" value="450.9002293325594" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.5069797398950145" />
-      <entry key="MS500" value="0.8731306864933198" />
-      <entry key="S2" value="1.0840636026099464" />
-      <entry key="S5" value="1.5390577650893047" />
-      <entry key="S10" value="2.183381465077215" />
-      <entry key="S30" value="3.719670270768716" />
-      <entry key="S60" value="4.614868434260216" />
-      <entry key="M2" value="5.257353113180966" />
-      <entry key="M5" value="7.6548608703490935" />
-      <entry key="M10" value="17.232867805559845" />
-      <entry key="M15" value="28.070993291529415" />
-      <entry key="M30" value="53.81159057960939" />
-      <entry key="H1" value="93.70702980461334" />
-      <entry key="H2" value="167.70304429154197" />
-      <entry key="H4" value="305.71171342960764" />
-      <entry key="D1" value="775.9344509497569" />
-      <entry key="W1" value="962.2217687964493" />
+      <entry key="MS100" value="5.876940261430218E-13" />
+      <entry key="MS500" value="0.00357956501826309" />
+      <entry key="S2" value="0.24460062579070824" />
+      <entry key="S5" value="0.5693548513395785" />
+      <entry key="S10" value="0.7545560624231831" />
+      <entry key="S30" value="0.9103965791523077" />
+      <entry key="S60" value="0.9553444624131184" />
+      <entry key="M2" value="1.0843268039984693" />
+      <entry key="M5" value="2.936726067097398" />
+      <entry key="M10" value="6.617298038381683" />
+      <entry key="M15" value="9.739771962698196" />
+      <entry key="M30" value="21.558817341793134" />
+      <entry key="H1" value="53.69708592104387" />
+      <entry key="H2" value="124.70233083012818" />
+      <entry key="H4" value="263.3732063376074" />
+      <entry key="D1" value="770.1947972438927" />
+      <entry key="W1" value="981.6971919896777" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -199,7 +199,8 @@
       <workItem from="1783142047824" duration="6946000" />
       <workItem from="1783172067861" duration="5909000" />
       <workItem from="1783226644667" duration="6066000" />
-      <workItem from="1783315062935" duration="2580000" />
+      <workItem from="1783315062935" duration="3983000" />
+      <workItem from="1783397757208" duration="5100000" />
     </task>
     <task id="LOCAL-00001" summary="change project dir">
       <option name="closed" value="true" />
@@ -361,7 +362,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783235870418</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)">
+      <option name="closed" value="true" />
+      <created>1783317818950</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1783317818950</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,6 +396,7 @@
     <MESSAGE value="refactor(posts): standardize on server actions, add blog listing&#10;&#10;- Rename createPost -&gt; createPostAction for clarity, drop unused&#10;  Convex useMutation hook from create/page.tsx (server action was&#10;  already handling the mutation)&#10;- Remove unused app/api/create-blog/route.ts (dead route handler,&#10;  never called)&#10;- Add convex/posts.ts getPosts query and wire it into blog/page.tsx&#10;  via fetchQuery (server component, no client fetch)&#10;- revalidatePath('/blog') after createPostAction so new posts show&#10;  up immediately" />
     <MESSAGE value="blog function :&#10;added card and images just for testing" />
     <MESSAGE value="blog loading - server side :&#10;handle delay from server by using Suspense react component" />
-    <option name="LAST_COMMIT_MESSAGE" value="blog loading - server side :&#10;handle delay from server by using Suspense react component" />
+    <MESSAGE value="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)" />
   </component>
 </project>

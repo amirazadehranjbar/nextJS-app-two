@@ -1,8 +1,10 @@
 "use client"
 import React, {useState} from 'react';
-import {motion, AnimatePresence} from 'motion/react';
+import {motion, AnimatePresence, LayoutGroup} from 'motion/react';
+import Image from "next/image";
 
 interface ExpandableCardProps {
+    id: string;
     imageSrc?: string;
     title?: string;
     author?: string;
@@ -11,6 +13,7 @@ interface ExpandableCardProps {
 }
 
 export default function ExpandableProfileCard({
+                                                  id,
                                                   imageSrc = "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1000",
                                                   title = "Jane Doe",
                                                   author = "Senior UX Designer",
@@ -18,27 +21,27 @@ export default function ExpandableProfileCard({
                                                   body
                                               }: ExpandableCardProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const layoutId = `expandable-profile-card-${title}`;
+    const layoutId = `expandable-profile-card-${id}`;
 
     return (
-        <>
+        <LayoutGroup id={id}>
             <motion.div
-                layoutId={layoutId}
+                layout
                 onClick={() => setIsOpen(true)}
-                className="cursor-pointer relative h-64 w-100 overflow-hidden rounded-xl border border-border group shadow-sm"
+                className="cursor-pointer relative h-64 w-full overflow-hidden rounded-xl border border-border group shadow-sm"
                 whileHover="hover"
             >
-                <motion.img
-                    layoutId={`image-${layoutId}`}
-                    src={imageSrc}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    variants={{
-                        hover: {scale: 1.05}
-                    }}
-                />
+                <motion.div layoutId={`image-${layoutId}`} className="absolute inset-0 h-full w-full">
+                    <Image
+                        src={imageSrc}
+                        fill
+                        sizes="(max-width: 768px) 50vw, 25vw"
+                        alt={title}
+                        className="object-cover"
+                    />
+                </motion.div>
                 <div
                     className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity"/>
-
                 <div
                     className="absolute bottom-0 left-0 p-5 sm:p-6 w-full translate-y-4 group-hover:translate-y-0 transition-transform duration-300 backdrop-blur-md">
                     <motion.p layoutId={`subtitle-${layoutId}`}
@@ -95,19 +98,18 @@ export default function ExpandableProfileCard({
                                     animate={{opacity: 1, x: 0}}
                                     exit={{opacity: 0, x: 10}}
                                     transition={{delay: 0.2}}
-                                    className="text-foreground/80 text-sm leading-relaxed grow"
+                                    className="text-foreground/80 text-sm leading-relaxed grow flex flex-col"
                                 >
                                     {content || (
-                                        <div className="flex flex-col gap-6">
-
+                                        <div className="flex flex-col gap-6 grow">
                                             <div>
                                                 <h4 className="text-chart-1 font-semibold tracking-tight mb-2">Background</h4>
                                                 <p className="text-muted-foreground">{body}</p>
                                             </div>
 
-                                            <div className="translate-x-4/5 translate-y-100">
+                                            <div className="mt-auto flex justify-end">
                                                 <button
-                                                    className="mt-4 px-5 py-2.5 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity self-start shadow-sm">
+                                                    className="px-5 py-2.5 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity shadow-sm">
                                                     see more
                                                 </button>
                                             </div>
@@ -119,6 +121,7 @@ export default function ExpandableProfileCard({
                     </div>
                 )}
             </AnimatePresence>
-        </>
+        </LayoutGroup>
     );
 }
+
