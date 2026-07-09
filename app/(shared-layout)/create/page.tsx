@@ -15,6 +15,9 @@ import {createPostAction} from "@/app/(shared-layout)/create/actions";
 
 function CreatePost() {
 
+    const generateUploadUrl = useMutation(api.posts.createPost);
+    const sendImage = useMutation(api.messages.sendImage);
+
     const form = useForm({
         resolver: standardSchemaResolver(postSchema),
         defaultValues: {title: "", content: ""}
@@ -83,6 +86,23 @@ function CreatePost() {
                                     </Field>
                                 )}
                             />
+
+                            <Controller
+                                name="image"
+                                control={form.control}
+                                render={({field, fieldState}) => (
+                                    <Field data-invalid={!!fieldState.error}>
+                                        <FieldLabel htmlFor={field.name}>image</FieldLabel>
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            ref={imageInput}
+                                            onChange={(event) => setSelectedImage(event.target.files![0])}
+                                            disabled={selectedImage !== null}
+                                        />
+                                    </Field>
+                                )}
+                            />
                         </FieldGroup>
 
                         <Button className="w-full mt-4" type="submit" disabled={isPending}>
@@ -101,3 +121,5 @@ function CreatePost() {
 }
 
 export default CreatePost
+
+

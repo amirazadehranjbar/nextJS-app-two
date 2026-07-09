@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)">
+    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="blog function :&#10;added card and images just for testing">
+      <change afterPath="$PROJECT_DIR$/.idea/ShadcnHelperSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/app-two.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(shared-layout)/blog/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/blog/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/myComponents/expandable-profile-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/myComponents/expandable-profile-card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/schemas/postSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/postSchema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convex/posts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/posts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/convex/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/schema.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,61 +50,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="1.4499259517620076E-107" />
-      <entry key="S5" value="2.6931959095637504E-43" />
-      <entry key="S10" value="7.294827549214329E-22" />
-      <entry key="S30" value="1.4746973137000732E-7" />
-      <entry key="S60" value="6.538167168943939E-4" />
-      <entry key="M2" value="0.05195718867038233" />
-      <entry key="M5" value="0.8222454946268968" />
-      <entry key="M10" value="2.21904447519707" />
-      <entry key="M15" value="3.4760589388319314" />
-      <entry key="M30" value="9.148557653353075" />
-      <entry key="H1" value="25.205137116082405" />
-      <entry key="H2" value="61.63739107870584" />
-      <entry key="H4" value="136.30924026223906" />
-      <entry key="D1" value="414.69995990266034" />
-      <entry key="W1" value="530.7994733104754" />
+      <entry key="MS100" value="1.934806150479138E-53" />
+      <entry key="MS500" value="2.8702083735003275E-11" />
+      <entry key="S2" value="0.0029795337824562876" />
+      <entry key="S5" value="0.1685693700247633" />
+      <entry key="S10" value="0.6970586689693358" />
+      <entry key="S30" value="1.8363169734967015" />
+      <entry key="S60" value="2.3460928348061385" />
+      <entry key="M2" value="2.6676324700974825" />
+      <entry key="M5" value="3.0428641980174507" />
+      <entry key="M10" value="3.3773179018352693" />
+      <entry key="M15" value="3.7182515528476845" />
+      <entry key="M30" value="6.739598904230819" />
+      <entry key="H1" value="20.172376726964572" />
+      <entry key="H2" value="56.254956749950686" />
+      <entry key="H4" value="130.61072212292024" />
+      <entry key="D1" value="379.5534416308621" />
+      <entry key="W1" value="475.2540874911954" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.000000092075471" />
-      <entry key="S60" value="1.000554041358952" />
-      <entry key="M2" value="1.056182410364864" />
-      <entry key="M5" value="2.129407596228514" />
-      <entry key="M10" value="4.411790598937802" />
-      <entry key="M15" value="6.276654578915886" />
-      <entry key="M30" value="12.425996185347573" />
-      <entry key="H1" value="28.514099294714864" />
-      <entry key="H2" value="63.09209506939834" />
-      <entry key="H4" value="127.09263103742843" />
-      <entry key="D1" value="355.50864270792016" />
-      <entry key="W1" value="450.9002293325594" />
+      <entry key="MS100" value="1.0000000000152753" />
+      <entry key="MS500" value="1.006906618869668" />
+      <entry key="S2" value="1.376829523138385" />
+      <entry key="S5" value="2.1278173551693786" />
+      <entry key="S10" value="2.7786767675831596" />
+      <entry key="S30" value="3.500069591651105" />
+      <entry key="S60" value="3.7613756440738864" />
+      <entry key="M2" value="4.176863281786151" />
+      <entry key="M5" value="5.908807693974315" />
+      <entry key="M10" value="7.916487215734055" />
+      <entry key="M15" value="9.323516780002736" />
+      <entry key="M30" value="14.923862993432317" />
+      <entry key="H1" value="31.01915502966491" />
+      <entry key="H2" value="64.21429050305092" />
+      <entry key="H4" value="124.7558280912431" />
+      <entry key="D1" value="325.4783131705086" />
+      <entry key="W1" value="403.636540043694" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="5.876940261430218E-13" />
-      <entry key="MS500" value="0.00357956501826309" />
-      <entry key="S2" value="0.24460062579070824" />
-      <entry key="S5" value="0.5693548513395785" />
-      <entry key="S10" value="0.7545560624231831" />
-      <entry key="S30" value="0.9103965791523077" />
-      <entry key="S60" value="0.9553444624131184" />
-      <entry key="M2" value="1.0843268039984693" />
-      <entry key="M5" value="2.936726067097398" />
-      <entry key="M10" value="6.617298038381683" />
-      <entry key="M15" value="9.739771962698196" />
-      <entry key="M30" value="21.558817341793134" />
-      <entry key="H1" value="53.69708592104387" />
-      <entry key="H2" value="124.70233083012818" />
-      <entry key="H4" value="263.3732063376074" />
-      <entry key="D1" value="770.1947972438927" />
-      <entry key="W1" value="981.6971919896777" />
+      <entry key="MS100" value="5.181955635906909E-7" />
+      <entry key="MS500" value="0.055794473685836836" />
+      <entry key="S2" value="0.6566837545004548" />
+      <entry key="S5" value="1.6898546324646333" />
+      <entry key="S10" value="3.011200580160781" />
+      <entry key="S30" value="5.11086730552248" />
+      <entry key="S60" value="5.97981926731692" />
+      <entry key="M2" value="6.768603194431485" />
+      <entry key="M5" value="8.90587551222233" />
+      <entry key="M10" value="11.263159566107072" />
+      <entry key="M15" value="13.017736641785806" />
+      <entry key="M30" value="21.642416066588986" />
+      <entry key="H1" value="51.16586539492152" />
+      <entry key="H2" value="120.4405267809228" />
+      <entry key="H4" value="255.33778719134048" />
+      <entry key="D1" value="705.0190068001235" />
+      <entry key="W1" value="878.8883648345201" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -124,6 +130,7 @@
     &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
     &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
     &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;kronk.content.tree.expanded.paths&quot;: &quot;&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Projects/nextJS/app-two/public&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -131,7 +138,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Projects\\nextJS\\app-two\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\amira\\Desktop\\projects\\nextJS\\app-two\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -198,9 +205,9 @@
       <workItem from="1783140880676" duration="1136000" />
       <workItem from="1783142047824" duration="6946000" />
       <workItem from="1783172067861" duration="5909000" />
-      <workItem from="1783226644667" duration="6066000" />
-      <workItem from="1783315062935" duration="3983000" />
-      <workItem from="1783397757208" duration="5100000" />
+      <workItem from="1783226644667" duration="5196000" />
+      <workItem from="1783584935467" duration="976000" />
+      <workItem from="1783604329570" duration="4929000" />
     </task>
     <task id="LOCAL-00001" summary="change project dir">
       <option name="closed" value="true" />
@@ -354,23 +361,7 @@
       <option name="project" value="LOCAL" />
       <updated>1783152209914</updated>
     </task>
-    <task id="LOCAL-00020" summary="blog loading - server side :&#10;handle delay from server by using Suspense react component">
-      <option name="closed" value="true" />
-      <created>1783235870418</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1783235870418</updated>
-    </task>
-    <task id="LOCAL-00021" summary="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)">
-      <option name="closed" value="true" />
-      <created>1783317818950</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1783317818950</updated>
-    </task>
-    <option name="localTasksCounter" value="22" />
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,8 +386,6 @@
     <MESSAGE value="refactor(create-post): move post creation to a server action&#10;&#10;- Replace client-side authClient.getSession() in actions.ts with&#10;  fetchAuthMutation from lib/auth-server, since authClient relies on&#10;  relative URLs that only resolve in the browser and crash on the server&#10;- Let the Convex posts.createPost mutation be the single source of truth&#10;  for the auth check (authComponent.safeGetAuthUser) instead of&#10;  duplicating it in the server action&#10;- Add revalidatePath('/') to invalidate the stale homepage cache after&#10;  a new post is created&#10;- Add redirect('/') to navigate the user after a successful post,&#10;  replacing the client-side router.push('/')&#10;- Handle redirect's internal NEXT_REDIRECT throw correctly on the&#10;  client using unstable_rethrow, so it isn't caught as an app error&#10;- Wrap the submit handler in startTransition with try/catch for proper&#10;  pending state and error toasts" />
     <MESSAGE value="refactor(posts): standardize on server actions, add blog listing&#10;&#10;- Rename createPost -&gt; createPostAction for clarity, drop unused&#10;  Convex useMutation hook from create/page.tsx (server action was&#10;  already handling the mutation)&#10;- Remove unused app/api/create-blog/route.ts (dead route handler,&#10;  never called)&#10;- Add convex/posts.ts getPosts query and wire it into blog/page.tsx&#10;  via fetchQuery (server component, no client fetch)&#10;- revalidatePath('/blog') after createPostAction so new posts show&#10;  up immediately" />
     <MESSAGE value="blog function :&#10;added card and images just for testing" />
-    <MESSAGE value="blog loading - server side :&#10;handle delay from server by using Suspense react component" />
-    <MESSAGE value="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)" />
+    <option name="LAST_COMMIT_MESSAGE" value="blog function :&#10;added card and images just for testing" />
   </component>
 </project>

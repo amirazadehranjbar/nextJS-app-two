@@ -19,9 +19,11 @@ export async function createPostAction(values: z.infer<typeof postSchema>) {
     await fetchAuthMutation(api.posts.createPost, {
         title: parsed.data!.title,
         body: parsed.data!.content,
+        image : parsed.data!.image
     })
 
     revalidatePath('/')
     revalidatePath('/blog')
     redirect('/blog')
 }
+
