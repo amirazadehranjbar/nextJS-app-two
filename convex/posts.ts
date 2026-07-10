@@ -6,24 +6,33 @@ export const createPost = mutation({
     args: {
         title: v.string(),
         body: v.string(),
-        image: v.string(),
+        storageId: v.optional(v.id("_storage")),
     },
     handler: async (ctx, args) => {
-
         const user = await authComponent.safeGetAuthUser(ctx);
 
         if (!user) {
             throw new ConvexError("You must be logged in to perform this action.");
         }
 
-        const blogArticle = await ctx.db.insert("posts",
-            {
-                title: args.title,
-                body: args.body,
-                authorId: user._id,
-                image: args.image
-            }
-        );
+        const image = args.storageId ? await ctx.storage.getUrl(args.storageId) : undefined;
+
+        await ctx.db.insert("posts", {
+            title: args.title,
+            body: args.body,
+            authorId: user._id,
+            image: image ?? undefined,
+        });
+    },
+});
+
+
+export const generateUploadUrl = mutation({
+    args: {},
+    handler: async (ctx) => {
+        const user = await authComponent.safeGetAuthUser(ctx);
+        if (!user) throw new ConvexError("You must be logged in to perform this action.");
+        return await ctx.storage.generateUploadUrl();
     },
 });
 

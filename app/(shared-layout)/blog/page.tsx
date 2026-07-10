@@ -1,9 +1,7 @@
 import React, {Suspense} from 'react'
 import {fetchQuery} from "convex/nextjs"
 import {api} from "@/convex/_generated/api"
-import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/card";
-import Image from "next/image";
-import Link from "next/link";
+import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import ExpandableProfileCard from "@/components/myComponents/expandable-profile-card";
 import {Skeleton} from "@/components/ui/skeleton";
 
@@ -43,7 +41,8 @@ export async function LoadingBlogs() {
 
             {posts.map((post) => {
                 return (
-                    <ExpandableProfileCard key={post._id} id={post._id} imageSrc={`/test2.png`} title={post.title} body={post.body} author={post.authorId}/>
+                    <ExpandableProfileCard key={post._id} id={post._id} imageSrc={post.image ?? "/article.png"}
+                                           title={post.title} body={post.body} author={post.authorId}/>
                 );
             })}
         </div>

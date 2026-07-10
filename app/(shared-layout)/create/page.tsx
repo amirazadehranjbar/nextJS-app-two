@@ -1,5 +1,5 @@
 "use client"
-import React, {useTransition} from 'react'
+import React, {FormEvent, SyntheticEvent, useRef, useState, useTransition} from 'react'
 import {Card, CardContent, CardDescription, CardTitle} from "@/components/ui/card";
 import {Controller, useForm} from "react-hook-form";
 import {standardSchemaResolver} from "@hookform/resolvers/standard-schema";
@@ -10,35 +10,50 @@ import {api} from "@/convex/_generated/api";
 import z from "zod"
 import {toast} from "sonner";
 import {Loader2} from "lucide-react";
-import {unstable_rethrow, useRouter} from "next/navigation";
+import {unstable_rethrow} from "next/navigation";
 import {createPostAction} from "@/app/(shared-layout)/create/actions";
+import {useMutation} from "convex/react";
+import {Id} from "@/convex/_generated/dataModel";
 
 function CreatePost() {
 
-    const generateUploadUrl = useMutation(api.posts.createPost);
-    const sendImage = useMutation(api.messages.sendImage);
+    //region select an upload image functions section ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
+    const generateUploadUrl = useMutation(api.posts.generateUploadUrl);
+    const imageInput = useRef<HTMLInputElement>(null);
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
+    const onSubmit = async (values: z.infer<typeof postSchema>) => {
+        startTransition(async () => {
+            try {
+                let storageId: Id<"_storage"> | undefined;
+
+                if (selectedImage) {
+                    const postUrl = await generateUploadUrl();
+                    const result = await fetch(postUrl, {
+                        method: "POST",
+                        headers: {"Content-Type": selectedImage.type},
+                        body: selectedImage,
+                    });
+                    ({storageId} = await result.json());
+                }
+
+                await createPostAction(values, storageId);
+                toast.success("Article posted successfully");
+            } catch (e) {
+                unstable_rethrow(e);
+                toast.error("you must log in first");
+            }
+        });
+    };
+    //endregion
+
 
     const form = useForm({
         resolver: standardSchemaResolver(postSchema),
         defaultValues: {title: "", content: ""}
     });
 
-    const router = useRouter();
     const [isPending, startTransition] = useTransition();
-
-
-    const onSubmit = async (values: z.infer<typeof postSchema>) => {
-        startTransition(async () => {
-            try {
-                await createPostAction(values)
-                toast.success("Article posted successfully")
-            } catch (e) {
-                unstable_rethrow(e)          // lets the redirect through untouched
-                //toast.error(e instanceof Error ? e.message : "Something went wrong")
-                toast.error("you must log in first")
-            }
-        })
-    }
 
 
     return (

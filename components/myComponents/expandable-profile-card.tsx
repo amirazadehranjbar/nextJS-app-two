@@ -14,7 +14,7 @@ interface ExpandableCardProps {
 
 export default function ExpandableProfileCard({
                                                   id,
-                                                  imageSrc = "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1000",
+                                                  imageSrc = "/article.png",
                                                   title = "Jane Doe",
                                                   author = "Senior UX Designer",
                                                   content,
@@ -37,7 +37,7 @@ export default function ExpandableProfileCard({
                         fill
                         sizes="(max-width: 768px) 50vw, 25vw"
                         alt={title}
-                        className="object-cover"
+                        className="object-center"
                     />
                 </motion.div>
                 <div
@@ -80,7 +80,7 @@ export default function ExpandableProfileCard({
                                 <motion.img
                                     layoutId={`image-${layoutId}`}
                                     src={imageSrc}
-                                    className="h-full w-full object-cover"
+                                    className="h-full w-full object-fill"
                                 />
                                 <div
                                     className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent md:hidden"/>

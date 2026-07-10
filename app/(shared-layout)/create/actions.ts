@@ -6,24 +6,25 @@ import {fetchAuthMutation} from '@/lib/auth-server'
 import {api} from '@/convex/_generated/api'
 import {postSchema} from "@/app/schemas/postSchema"
 import {redirect} from "next/navigation";
+import {Id} from "@/convex/_generated/dataModel";
 
 
-export async function createPostAction(values: z.infer<typeof postSchema>) {
 
+export async function createPostAction(
+    values: z.infer<typeof postSchema>,
+    storageId?: Id<"_storage">
+) {
     const parsed = postSchema.safeParse(values);
-
-    if (!parsed.success){
-        throw new Error("some data not validated")
-    }
+    if (!parsed.success) throw new Error("some data not validated");
 
     await fetchAuthMutation(api.posts.createPost, {
         title: parsed.data!.title,
         body: parsed.data!.content,
-        image : parsed.data!.image
-    })
+        storageId,
+    });
 
-    revalidatePath('/')
-    revalidatePath('/blog')
-    redirect('/blog')
+    revalidatePath('/');
+    revalidatePath('/blog');
+    redirect('/blog');
 }
 
