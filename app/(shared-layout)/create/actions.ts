@@ -11,8 +11,8 @@ import {Id} from "@/convex/_generated/dataModel";
 
 
 export async function createPostAction(
-    values: z.infer<typeof postSchema>,
-    storageId?: Id<"_storage">
+    values: z.infer<typeof postSchema>
+
 ) {
     const parsed = postSchema.safeParse(values);
     if (!parsed.success) throw new Error("some data not validated");
@@ -20,7 +20,8 @@ export async function createPostAction(
     await fetchAuthMutation(api.posts.createPost, {
         title: parsed.data!.title,
         body: parsed.data!.content,
-        storageId,
+        imageUrl : parsed.data.imageUrl || null
+
     });
 
     revalidatePath('/');

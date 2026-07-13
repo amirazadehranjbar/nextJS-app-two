@@ -1,51 +1,19 @@
 "use client"
-import React, {FormEvent, SyntheticEvent, useRef, useState, useTransition} from 'react'
+import React, {useState, useTransition} from 'react'
 import {Card, CardContent, CardDescription, CardTitle} from "@/components/ui/card";
 import {Controller, useForm} from "react-hook-form";
 import {standardSchemaResolver} from "@hookform/resolvers/standard-schema";
 import {postSchema} from "@/app/schemas/postSchema";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field";
 import {Button} from "@/components/ui/button";
-import {api} from "@/convex/_generated/api";
-import z from "zod"
-import {toast} from "sonner";
 import {Loader2} from "lucide-react";
-import {unstable_rethrow} from "next/navigation";
-import {createPostAction} from "@/app/(shared-layout)/create/actions";
-import {useMutation} from "convex/react";
-import {Id} from "@/convex/_generated/dataModel";
+import {generateUploadUrl} from "@/convex/posts";
 
 function CreatePost() {
 
-    //region select an upload image functions section ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-    const generateUploadUrl = useMutation(api.posts.generateUploadUrl);
-    const imageInput = useRef<HTMLInputElement>(null);
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [isPending, startTransition] = useTransition();
 
-    const onSubmit = async (values: z.infer<typeof postSchema>) => {
-        startTransition(async () => {
-            try {
-                let storageId: Id<"_storage"> | undefined;
-
-                if (selectedImage) {
-                    const postUrl = await generateUploadUrl();
-                    const result = await fetch(postUrl, {
-                        method: "POST",
-                        headers: {"Content-Type": selectedImage.type},
-                        body: selectedImage,
-                    });
-                    ({storageId} = await result.json());
-                }
-
-                await createPostAction(values, storageId);
-                toast.success("Article posted successfully");
-            } catch (e) {
-                unstable_rethrow(e);
-                toast.error("you must log in first");
-            }
-        });
-    };
-    //endregion
+    const [file, setFile] = useState<File | null>(null);
 
 
     const form = useForm({
@@ -53,7 +21,21 @@ function CreatePost() {
         defaultValues: {title: "", content: ""}
     });
 
-    const [isPending, startTransition] = useTransition();
+   async function onSubmit() {
+        try {
+            const uploadUrl = await generateUploadUrl(); // call the mutation
+
+            const result = await fetch(uploadUrl, {
+                method: "POST",
+                headers: { "Content-Type": file.type },
+                body: file,
+            });
+            const { storageId } = await result.json();
+
+        } catch (e) {
+
+        }
+    }
 
 
     return (
@@ -72,7 +54,10 @@ function CreatePost() {
                 <CardContent>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
 
+
                         <FieldGroup>
+
+                            {/*region Title ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖*/}
                             <Controller
                                 name="title"
                                 control={form.control}
@@ -86,8 +71,9 @@ function CreatePost() {
                                     </Field>
                                 )}
                             />
+                            {/*endregion*/}
 
-
+                            {/*region Content ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖*/}
                             <Controller
                                 name="content"
                                 control={form.control}
@@ -101,9 +87,11 @@ function CreatePost() {
                                     </Field>
                                 )}
                             />
+                            {/*endregion*/}
 
+                            {/*region Image ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖*/}
                             <Controller
-                                name="image"
+                                name="imageUrl"
                                 control={form.control}
                                 render={({field, fieldState}) => (
                                     <Field data-invalid={!!fieldState.error}>
@@ -111,13 +99,13 @@ function CreatePost() {
                                         <input
                                             type="file"
                                             accept="image/*"
-                                            ref={imageInput}
-                                            onChange={(event) => setSelectedImage(event.target.files![0])}
-                                            disabled={selectedImage !== null}
+                                            onChange={(event) => setFile(event.target.files![0])}
+                                            disabled={file !== null}
                                         />
                                     </Field>
                                 )}
                             />
+                            {/*endregion*/}
                         </FieldGroup>
 
                         <Button className="w-full mt-4" type="submit" disabled={isPending}>

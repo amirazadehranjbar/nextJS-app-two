@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)">
-      <change afterPath="$PROJECT_DIR$/public/article.png" afterDir="false" />
+    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="feat(posts): add image upload via Convex file storage&#10;&#10;- Add generateUploadUrl mutation to request a short-lived upload URL&#10;  from Convex storage (auth-gated, same pattern as createPost)&#10;- Change createPost to accept an optional storageId instead of a raw&#10;  image string; resolves it to a public URL via ctx.storage.getUrl()&#10;  before inserting, so posts without an image stay undefined&#10;- Make posts.image optional in schema.ts to match (old docs and&#10;  image-less posts no longer fail schema validation)&#10;- Wire the create-post form to the real upload flow: on submit, POST&#10;  the selected file to the generated upload URL, get back a storageId,&#10;  then pass it to createPostAction alongside the form values&#10;- Drop the dead image field from postSchema (was unused/mismatched&#10;  with the actual upload flow) and unused router/useMutation leftovers&#10;  in create/page.tsx&#10;- Configure next.config.ts images.remotePatterns to allow the Convex&#10;  storage domain, fixing &quot;hostname not configured&quot; on next/image&#10;- Fall back to /article.png in blog page + ExpandableProfileCard when&#10;  a post has no image">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(shared-layout)/blog/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/blog/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/schemas/postSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/postSchema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/myComponents/expandable-profile-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/myComponents/expandable-profile-card.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/convex/posts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/posts.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/convex/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,61 +52,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.8291106196283675E-151" />
-      <entry key="MS500" value="7.119475408286318E-31" />
-      <entry key="S2" value="2.9047716584549794E-8" />
-      <entry key="S5" value="9.665955678413482E-4" />
-      <entry key="S10" value="0.031090120100143514" />
-      <entry key="S30" value="0.31444218098791693" />
-      <entry key="S60" value="0.560751464255263" />
-      <entry key="M2" value="0.7492475321892343" />
-      <entry key="M5" value="1.1331016303761212" />
-      <entry key="M10" value="3.5411295207180435" />
-      <entry key="M15" value="7.112875263318682" />
-      <entry key="M30" value="17.39572689240367" />
-      <entry key="H1" value="35.226073610929625" />
-      <entry key="H2" value="70.9871316976252" />
-      <entry key="H4" value="144.63900785066662" />
-      <entry key="D1" value="438.85881540777103" />
-      <entry key="W1" value="567.8903742805221" />
+      <entry key="MS100" value="1.0001566682003862" />
+      <entry key="MS500" value="1.1736383671556707" />
+      <entry key="S2" value="1.7722191036172714" />
+      <entry key="S5" value="2.289604593121884" />
+      <entry key="S10" value="2.6962207945316763" />
+      <entry key="S30" value="4.034066410170318" />
+      <entry key="S60" value="6.092620166811337" />
+      <entry key="M2" value="8.969532692744544" />
+      <entry key="M5" value="13.147521245684961" />
+      <entry key="M10" value="16.874656739724625" />
+      <entry key="M15" value="20.379308303550243" />
+      <entry key="M30" value="30.572211935345795" />
+      <entry key="H1" value="48.73202046461383" />
+      <entry key="H2" value="84.65975205231837" />
+      <entry key="H4" value="158.30782004331866" />
+      <entry key="D1" value="455.6828390589694" />
+      <entry key="W1" value="587.3031751255626" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="1.000008643218119" />
-      <entry key="MS500" value="1.0971259086016147" />
-      <entry key="S2" value="1.5598015486425572" />
-      <entry key="S5" value="1.8945774612365998" />
-      <entry key="S10" value="2.3333642537272468" />
-      <entry key="S30" value="3.1664404704292157" />
-      <entry key="S60" value="3.5319295317886095" />
-      <entry key="M2" value="3.752179215906744" />
-      <entry key="M5" value="4.120147383853517" />
-      <entry key="M10" value="5.758926997494425" />
-      <entry key="M15" value="7.9390517554837" />
-      <entry key="M30" value="14.5176403794682" />
-      <entry key="H1" value="28.59643671291824" />
-      <entry key="H2" value="60.491659109919" />
-      <entry key="H4" value="123.70316190834063" />
-      <entry key="D1" value="366.2464288110527" />
-      <entry key="W1" value="472.47401014979744" />
+      <entry key="MS100" value="2.231585280667681E-305" />
+      <entry key="MS500" value="1.1741476078629672E-61" />
+      <entry key="S2" value="5.853702880187517E-16" />
+      <entry key="S5" value="8.074371868471584E-7" />
+      <entry key="S10" value="9.26158550954839E-4" />
+      <entry key="S30" value="0.19170931891529086" />
+      <entry key="S60" value="1.1513370023403726" />
+      <entry key="M2" value="3.4135792520254733" />
+      <entry key="M5" value="7.916742916731814" />
+      <entry key="M10" value="12.047098485200722" />
+      <entry key="M15" value="15.121433410472141" />
+      <entry key="M30" value="22.743391536452297" />
+      <entry key="H1" value="37.27073685540392" />
+      <entry key="H2" value="69.09377051099851" />
+      <entry key="H4" value="132.28672347210187" />
+      <entry key="D1" value="377.5949115822514" />
+      <entry key="W1" value="485.9853116476089" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.010821167719616593" />
-      <entry key="MS500" value="0.4044406743698123" />
-      <entry key="S2" value="0.8017452957563989" />
-      <entry key="S5" value="1.0844879035659947" />
-      <entry key="S10" value="1.6468012016271156" />
-      <entry key="S30" value="3.052025145688515" />
-      <entry key="S60" value="3.831288306740072" />
-      <entry key="M2" value="4.355441529730011" />
-      <entry key="M5" value="5.189235716584819" />
-      <entry key="M10" value="9.26226943436157" />
-      <entry key="M15" value="15.021926481960755" />
-      <entry key="M30" value="31.89067102619401" />
-      <entry key="H1" value="63.80081248451629" />
-      <entry key="H2" value="131.45414628858245" />
-      <entry key="H4" value="268.31531480109703" />
-      <entry key="D1" value="805.0912473156036" />
-      <entry key="W1" value="1040.3617869693885" />
+      <entry key="MS100" value="0.9012504772053299" />
+      <entry key="MS500" value="1.0066350158254298" />
+      <entry key="S2" value="1.50582873871565" />
+      <entry key="S5" value="2.1132862411067914" />
+      <entry key="S10" value="2.587732411473409" />
+      <entry key="S30" value="4.157999149070491" />
+      <entry key="S60" value="7.165394046670629" />
+      <entry key="M2" value="12.293036927444668" />
+      <entry key="M5" value="20.980614443144887" />
+      <entry key="M10" value="28.85576537679613" />
+      <entry key="M15" value="35.44602895776577" />
+      <entry key="M30" value="53.27689437030946" />
+      <entry key="H1" value="85.97236425839883" />
+      <entry key="H2" value="153.72462686693683" />
+      <entry key="H4" value="290.565620593515" />
+      <entry key="D1" value="833.2633124506852" />
+      <entry key="W1" value="1073.285814442239" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -213,6 +209,9 @@
       <workItem from="1783226644667" duration="6066000" />
       <workItem from="1783315062935" duration="3983000" />
       <workItem from="1783397757208" duration="5100000" />
+      <workItem from="1783836721653" duration="129000" />
+      <workItem from="1783836858348" duration="660000" />
+      <workItem from="1783915743714" duration="4085000" />
     </task>
     <task id="LOCAL-00001" summary="change project dir">
       <option name="closed" value="true" />
@@ -382,7 +381,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783317818950</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feat(posts): add image upload via Convex file storage&#10;&#10;- Add generateUploadUrl mutation to request a short-lived upload URL&#10;  from Convex storage (auth-gated, same pattern as createPost)&#10;- Change createPost to accept an optional storageId instead of a raw&#10;  image string; resolves it to a public URL via ctx.storage.getUrl()&#10;  before inserting, so posts without an image stay undefined&#10;- Make posts.image optional in schema.ts to match (old docs and&#10;  image-less posts no longer fail schema validation)&#10;- Wire the create-post form to the real upload flow: on submit, POST&#10;  the selected file to the generated upload URL, get back a storageId,&#10;  then pass it to createPostAction alongside the form values&#10;- Drop the dead image field from postSchema (was unused/mismatched&#10;  with the actual upload flow) and unused router/useMutation leftovers&#10;  in create/page.tsx&#10;- Configure next.config.ts images.remotePatterns to allow the Convex&#10;  storage domain, fixing &quot;hostname not configured&quot; on next/image&#10;- Fall back to /article.png in blog page + ExpandableProfileCard when&#10;  a post has no image">
+      <option name="closed" value="true" />
+      <created>1783672845730</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1783672845730</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -409,6 +416,8 @@
     <MESSAGE value="blog function :&#10;added card and images just for testing" />
     <MESSAGE value="blog loading - server side :&#10;handle delay from server by using Suspense react component" />
     <MESSAGE value="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(blog): correct dark mode text contrast on blog page&#10;&#10;- Replace text-chart-5 with text-foreground for h1 (was invisible in dark mode, same value as --background)&#10;- Replace text-muted with text-muted-foreground for subtitle paragraph (was invisible in dark mode, same value as --background)" />
+    <MESSAGE value="feat(posts): add image upload via Convex file storage&#10;&#10;- Add generateUploadUrl mutation to request a short-lived upload URL&#10;  from Convex storage (auth-gated, same pattern as createPost)&#10;- Change createPost to accept an optional storageId instead of a raw&#10;  image string; resolves it to a public URL via ctx.storage.getUrl()&#10;  before inserting, so posts without an image stay undefined&#10;- Make posts.image optional in schema.ts to match (old docs and&#10;  image-less posts no longer fail schema validation)&#10;- Wire the create-post form to the real upload flow: on submit, POST&#10;  the selected file to the generated upload URL, get back a storageId,&#10;  then pass it to createPostAction alongside the form values&#10;- Drop the dead image field from postSchema (was unused/mismatched&#10;  with the actual upload flow) and unused router/useMutation leftovers&#10;  in create/page.tsx&#10;- Configure next.config.ts images.remotePatterns to allow the Convex&#10;  storage domain, fixing &quot;hostname not configured&quot; on next/image&#10;- Fall back to /article.png in blog page + ExpandableProfileCard when&#10;  a post has no image" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(posts): add image upload via Convex file storage&#10;&#10;- Add generateUploadUrl mutation to request a short-lived upload URL&#10;  from Convex storage (auth-gated, same pattern as createPost)&#10;- Change createPost to accept an optional storageId instead of a raw&#10;  image string; resolves it to a public URL via ctx.storage.getUrl()&#10;  before inserting, so posts without an image stay undefined&#10;- Make posts.image optional in schema.ts to match (old docs and&#10;  image-less posts no longer fail schema validation)&#10;- Wire the create-post form to the real upload flow: on submit, POST&#10;  the selected file to the generated upload URL, get back a storageId,&#10;  then pass it to createPostAction alongside the form values&#10;- Drop the dead image field from postSchema (was unused/mismatched&#10;  with the actual upload flow) and unused router/useMutation leftovers&#10;  in create/page.tsx&#10;- Configure next.config.ts images.remotePatterns to allow the Convex&#10;  storage domain, fixing &quot;hostname not configured&quot; on next/image&#10;- Fall back to /article.png in blog page + ExpandableProfileCard when&#10;  a post has no image" />
+    <option name="LAST_CHUNK_COMMIT_MESSAGE" value="Content" />
   </component>
 </project>
