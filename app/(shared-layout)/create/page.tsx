@@ -7,7 +7,8 @@ import {postSchema} from "@/app/schemas/postSchema";
 import {Field, FieldError, FieldGroup, FieldLabel} from "@/components/ui/field";
 import {Button} from "@/components/ui/button";
 import {Loader2} from "lucide-react";
-import {generateUploadUrl} from "@/convex/posts";
+import z from "zod";
+import {createPostAction, generateUploadUrlAction} from "@/app/(shared-layout)/create/actions";
 
 function CreatePost() {
 
@@ -15,28 +16,26 @@ function CreatePost() {
 
     const [file, setFile] = useState<File | null>(null);
 
-
     const form = useForm({
         resolver: standardSchemaResolver(postSchema),
         defaultValues: {title: "", content: ""}
     });
 
-   async function onSubmit() {
-        try {
-            const uploadUrl = await generateUploadUrl(); // call the mutation
+    async function onSubmit(values: z.infer<typeof postSchema>) {
+        let storageId: string | undefined;
 
+        if (file) {
+            const uploadUrl = await generateUploadUrlAction();
             const result = await fetch(uploadUrl, {
                 method: "POST",
-                headers: { "Content-Type": file.type },
+                headers: {"Content-Type": file.type},
                 body: file,
             });
-            const { storageId } = await result.json();
-
-        } catch (e) {
-
+            ({storageId} = await result.json());
         }
-    }
 
+        startTransition(() => createPostAction({...values, storageId}));
+    }
 
     return (
         <div className="h-full bg-chart-5 flex flex-col items-center">
@@ -89,22 +88,19 @@ function CreatePost() {
                             />
                             {/*endregion*/}
 
-                            {/*region Image ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖*/}
-                            <Controller
-                                name="imageUrl"
-                                control={form.control}
-                                render={({field, fieldState}) => (
-                                    <Field data-invalid={!!fieldState.error}>
-                                        <FieldLabel htmlFor={field.name}>image</FieldLabel>
-                                        <input
-                                            type="file"
-                                            accept="image/*"
-                                            onChange={(event) => setFile(event.target.files![0])}
-                                            disabled={file !== null}
-                                        />
-                                    </Field>
-                                )}
-                            />
+                            {/*region Image ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖*/}<Controller
+                            name="storageId"
+                            control={form.control}
+                            render={({field, fieldState}) => (
+                                <Field data-invalid={!!fieldState.error}>
+                                    <FieldLabel htmlFor={field.name}>upload you image</FieldLabel>
+                                    <input
+                                        type="file" accept="image/*"
+                                        className="p-2 border-2 outline-none border-border mb-2 shadow-lg shadow-chart-4 rounded-md focus:border-ring/50"
+                                        onChange={(e) => setFile(e.target.files![0])}/>
+                                </Field>
+                            )}
+                        />
                             {/*endregion*/}
                         </FieldGroup>
 

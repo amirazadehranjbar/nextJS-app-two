@@ -41,7 +41,7 @@ export async function LoadingBlogs() {
 
             {posts.map((post) => {
                 return (
-                    <ExpandableProfileCard key={post._id} id={post._id} imageSrc={post.image ?? "/article.png"}
+                    <ExpandableProfileCard key={post._id} id={post._id} imageSrc={post.imageUrl ?? "/article.png"}
                                            title={post.title} body={post.body} author={post.authorId}/>
                 );
             })}

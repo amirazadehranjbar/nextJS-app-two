@@ -9,6 +9,9 @@ import {redirect} from "next/navigation";
 import {Id} from "@/convex/_generated/dataModel";
 
 
+export async function generateUploadUrlAction(): Promise<string> {
+    return await fetchAuthMutation(api.posts.generateUploadUrl, {});
+}
 
 export async function createPostAction(
     values: z.infer<typeof postSchema>
@@ -20,8 +23,7 @@ export async function createPostAction(
     await fetchAuthMutation(api.posts.createPost, {
         title: parsed.data!.title,
         body: parsed.data!.content,
-        imageUrl : parsed.data.imageUrl || null
-
+        storageId: parsed.data.storageId as Id<"_storage"> | undefined,
     });
 
     revalidatePath('/');
