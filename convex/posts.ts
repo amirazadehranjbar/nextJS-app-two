@@ -42,3 +42,19 @@ export const getPosts = query({
         return posts;
     },
 });
+
+export const getPostById = query(
+    {
+        args:{postId : v.id("posts")},
+        handler:async (ctx, args)=>{
+
+            const post =await ctx.db.get(args.postId);
+            return post
+
+
+            // const resolvedImageUrl = post?.imageUrl !==undefined ? post?.imageUrl : await ctx.storage.getUrl(post?.imageUrl)
+
+        }
+
+    }
+)
