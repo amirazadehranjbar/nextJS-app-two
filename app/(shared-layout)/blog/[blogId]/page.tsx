@@ -1,8 +1,13 @@
 import React from 'react'
+import { FaRegArrowAltCircleLeft } from "react-icons/fa";
 
 function BlogIdPage() {
     return (
-        <div>BlogIdPage</div>
+        <div className="animate-in fade-in duration-500 w-full h-full bg-chart-5">
+            <div className="w-full shadow-md flex p-4">
+                <FaRegArrowAltCircleLeft className="size-9"/>
+            </div>
+        </div>
     )
 }
 
