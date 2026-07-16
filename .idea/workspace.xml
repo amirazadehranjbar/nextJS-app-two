@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="feat(posts): add image upload via Convex file storage&#10;&#10;- Add generateUploadUrl mutation to request a short-lived upload URL&#10;  from Convex storage (auth-gated, same pattern as createPost)&#10;- Change createPost to accept an optional storageId instead of a raw&#10;  image string; resolves it to a public URL via ctx.storage.getUrl()&#10;  before inserting, so posts without an image stay undefined&#10;- Make posts.image optional in schema.ts to match (old docs and&#10;  image-less posts no longer fail schema validation)&#10;- Wire the create-post form to the real upload flow: on submit, POST&#10;  the selected file to the generated upload URL, get back a storageId,&#10;  then pass it to createPostAction alongside the form values&#10;- Drop the dead image field from postSchema (was unused/mismatched&#10;  with the actual upload flow) and unused router/useMutation leftovers&#10;  in create/page.tsx&#10;- Configure next.config.ts images.remotePatterns to allow the Convex&#10;  storage domain, fixing &quot;hostname not configured&quot; on next/image&#10;- Fall back to /article.png in blog page + ExpandableProfileCard when&#10;  a post has no image">
+      <change afterPath="$PROJECT_DIR$/app/(shared-layout)/blog/[blogId]/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/create/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/schemas/postSchema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/schemas/postSchema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/posts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/posts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convex/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/convex/schema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/myComponents/expandable-profile-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/myComponents/expandable-profile-card.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,61 +49,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0001566682003862" />
-      <entry key="MS500" value="1.1736383671556707" />
-      <entry key="S2" value="1.7722191036172714" />
-      <entry key="S5" value="2.289604593121884" />
-      <entry key="S10" value="2.6962207945316763" />
-      <entry key="S30" value="4.034066410170318" />
-      <entry key="S60" value="6.092620166811337" />
-      <entry key="M2" value="8.969532692744544" />
-      <entry key="M5" value="13.147521245684961" />
-      <entry key="M10" value="16.874656739724625" />
-      <entry key="M15" value="20.379308303550243" />
-      <entry key="M30" value="30.572211935345795" />
-      <entry key="H1" value="48.73202046461383" />
-      <entry key="H2" value="84.65975205231837" />
-      <entry key="H4" value="158.30782004331866" />
-      <entry key="D1" value="455.6828390589694" />
-      <entry key="W1" value="587.3031751255626" />
+      <entry key="MS100" value="8.510906632222111E-93" />
+      <entry key="MS500" value="3.8547406636745433E-19" />
+      <entry key="S2" value="2.491721179134389E-5" />
+      <entry key="S5" value="0.01454714031610593" />
+      <entry key="S10" value="0.14904283805994695" />
+      <entry key="S30" value="1.680389155987901" />
+      <entry key="S60" value="3.826358976533795" />
+      <entry key="M2" value="6.449141028856875" />
+      <entry key="M5" value="11.006879491890171" />
+      <entry key="M10" value="14.789640101374966" />
+      <entry key="M15" value="17.64099811432835" />
+      <entry key="M30" value="26.623881655355635" />
+      <entry key="H1" value="45.04023178230307" />
+      <entry key="H2" value="81.47856439027564" />
+      <entry key="H4" value="155.2516146247777" />
+      <entry key="D1" value="463.9966535240209" />
+      <entry key="W1" value="605.1297461573599" />
     </decayedCancelled>
     <decayedSelected>
-      <entry key="MS100" value="2.231585280667681E-305" />
-      <entry key="MS500" value="1.1741476078629672E-61" />
-      <entry key="S2" value="5.853702880187517E-16" />
-      <entry key="S5" value="8.074371868471584E-7" />
-      <entry key="S10" value="9.26158550954839E-4" />
-      <entry key="S30" value="0.19170931891529086" />
-      <entry key="S60" value="1.1513370023403726" />
-      <entry key="M2" value="3.4135792520254733" />
-      <entry key="M5" value="7.916742916731814" />
-      <entry key="M10" value="12.047098485200722" />
-      <entry key="M15" value="15.121433410472141" />
-      <entry key="M30" value="22.743391536452297" />
-      <entry key="H1" value="37.27073685540392" />
-      <entry key="H2" value="69.09377051099851" />
-      <entry key="H4" value="132.28672347210187" />
-      <entry key="D1" value="377.5949115822514" />
-      <entry key="W1" value="485.9853116476089" />
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0000000056385512" />
+      <entry key="S5" value="1.0009758069364747" />
+      <entry key="S10" value="1.0607966209267636" />
+      <entry key="S30" value="2.1044185898548315" />
+      <entry key="S60" value="3.515950061718522" />
+      <entry key="M2" value="5.168392710954636" />
+      <entry key="M5" value="7.644185830512722" />
+      <entry key="M10" value="9.609276106447304" />
+      <entry key="M15" value="11.3336703513408" />
+      <entry key="M30" value="17.52669026737786" />
+      <entry key="H1" value="31.489251118119174" />
+      <entry key="H2" value="62.37828996441178" />
+      <entry key="H4" value="125.12905501027234" />
+      <entry key="D1" value="379.92928610474536" />
+      <entry key="W1" value="496.1893910386883" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9012504772053299" />
-      <entry key="MS500" value="1.0066350158254298" />
-      <entry key="S2" value="1.50582873871565" />
-      <entry key="S5" value="2.1132862411067914" />
-      <entry key="S10" value="2.587732411473409" />
-      <entry key="S30" value="4.157999149070491" />
-      <entry key="S60" value="7.165394046670629" />
-      <entry key="M2" value="12.293036927444668" />
-      <entry key="M5" value="20.980614443144887" />
-      <entry key="M10" value="28.85576537679613" />
-      <entry key="M15" value="35.44602895776577" />
-      <entry key="M30" value="53.27689437030946" />
-      <entry key="H1" value="85.97236425839883" />
-      <entry key="H2" value="153.72462686693683" />
-      <entry key="H4" value="290.565620593515" />
-      <entry key="D1" value="833.2633124506852" />
-      <entry key="W1" value="1073.285814442239" />
+      <entry key="MS100" value="5.8052284990288335E-9" />
+      <entry key="MS500" value="0.022530138616566005" />
+      <entry key="S2" value="0.3874523301662573" />
+      <entry key="S5" value="0.6994245061540818" />
+      <entry key="S10" value="1.022706048804611" />
+      <entry key="S30" value="3.6034827356823356" />
+      <entry key="S60" value="7.1650835195214135" />
+      <entry key="M2" value="11.482627062979075" />
+      <entry key="M5" value="18.57644453140124" />
+      <entry key="M10" value="24.3545198884987" />
+      <entry key="M15" value="28.940053990321818" />
+      <entry key="M30" value="44.123515051061894" />
+      <entry key="H1" value="76.50497696880741" />
+      <entry key="H2" value="143.83152374796197" />
+      <entry key="H4" value="280.3538161255021" />
+      <entry key="D1" value="843.9115198375085" />
+      <entry key="W1" value="1101.316424626829" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -127,7 +124,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Test-UploadImage&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
     &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
@@ -211,7 +208,9 @@
       <workItem from="1783397757208" duration="5100000" />
       <workItem from="1783836721653" duration="129000" />
       <workItem from="1783836858348" duration="660000" />
-      <workItem from="1783915743714" duration="4085000" />
+      <workItem from="1783915743714" duration="6412000" />
+      <workItem from="1784174953891" duration="2375000" />
+      <workItem from="1784181938253" duration="840000" />
     </task>
     <task id="LOCAL-00001" summary="change project dir">
       <option name="closed" value="true" />

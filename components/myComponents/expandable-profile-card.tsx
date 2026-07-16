@@ -2,6 +2,7 @@
 import React, {useState} from 'react';
 import {motion, AnimatePresence, LayoutGroup} from 'motion/react';
 import Image from "next/image";
+import Link from "next/link";
 
 interface ExpandableCardProps {
     id: string;
@@ -108,10 +109,11 @@ export default function ExpandableProfileCard({
                                             </div>
 
                                             <div className="mt-auto flex justify-end">
-                                                <button
+                                                <Link
+                                                    href={`/blog/${id}`}
                                                     className="px-5 py-2.5 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity shadow-sm">
                                                     see more
-                                                </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     )}
