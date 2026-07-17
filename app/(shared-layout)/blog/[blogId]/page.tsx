@@ -43,17 +43,6 @@ export default BlogIdPage
 // which is why calling it as {getPost(blogId)} inside JSX didn't work reliably
 // in a Client Component: React can't render a raw Promise like that outside
 // a Server Component or use().
-export const getPost = async (blogId : Id<"posts">) => {
-    const post = await fetchQuery(api.posts.getPostById , {postId : blogId})
-    if(!post){
-        return (<div>error</div>)
-    }
-    return (
-        <div className="w-full h-full flex flex-col items-center content-center">
-            {post?.title}
-        </div>
-    )
-}
 
 
 // This is the component that actually calls use().

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="blog page :&#10;add see more to view blog details using ID ---- step 3">
+    <list default="true" id="915f2cd8-fb24-4066-8471-d0a1507d5c6e" name="Changes" comment="fix(blog): resolve infinite suspense loop on blog detail page&#10;&#10;- Split getPost into a promise-returning getPostPromise + a PostContent&#10;  component that calls use() inside a Suspense boundary&#10;- Added a per-blogId promise cache (postPromiseCache) so the same&#10;  promise instance is returned across re-renders — previously each&#10;  render created a new fetchQuery promise, causing use() to suspend&#10;  indefinitely&#10;- Suspense now wraps only PostContent instead of the whole page, so&#10;  the header/back-arrow renders immediately while the post loads&#10;- Old getPost async function left in place for reference, unused">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/(shared-layout)/blog/[blogId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(shared-layout)/blog/[blogId]/page.tsx" afterDir="false" />
     </list>
@@ -214,7 +214,7 @@
       <workItem from="1784192113966" duration="378000" />
       <workItem from="1784208480379" duration="2829000" />
       <workItem from="1784261390898" duration="1050000" />
-      <workItem from="1784262569856" duration="6164000" />
+      <workItem from="1784262569856" duration="7373000" />
     </task>
     <task id="LOCAL-00001" summary="change project dir">
       <option name="closed" value="true" />
@@ -416,7 +416,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784211290830</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="fix(blog): resolve infinite suspense loop on blog detail page&#10;&#10;- Split getPost into a promise-returning getPostPromise + a PostContent&#10;  component that calls use() inside a Suspense boundary&#10;- Added a per-blogId promise cache (postPromiseCache) so the same&#10;  promise instance is returned across re-renders — previously each&#10;  render created a new fetchQuery promise, causing use() to suspend&#10;  indefinitely&#10;- Suspense now wraps only PostContent instead of the whole page, so&#10;  the header/back-arrow renders immediately while the post loads&#10;- Old getPost async function left in place for reference, unused">
+      <option name="closed" value="true" />
+      <created>1784269676126</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1784269676126</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -447,7 +455,8 @@
     <MESSAGE value="blog page :&#10;add see more to view blog details using ID ---- step 1" />
     <MESSAGE value="blog page :&#10;add see more to view blog details using ID ---- step 2" />
     <MESSAGE value="blog page :&#10;add see more to view blog details using ID ---- step 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="blog page :&#10;add see more to view blog details using ID ---- step 3" />
+    <MESSAGE value="fix(blog): resolve infinite suspense loop on blog detail page&#10;&#10;- Split getPost into a promise-returning getPostPromise + a PostContent&#10;  component that calls use() inside a Suspense boundary&#10;- Added a per-blogId promise cache (postPromiseCache) so the same&#10;  promise instance is returned across re-renders — previously each&#10;  render created a new fetchQuery promise, causing use() to suspend&#10;  indefinitely&#10;- Suspense now wraps only PostContent instead of the whole page, so&#10;  the header/back-arrow renders immediately while the post loads&#10;- Old getPost async function left in place for reference, unused" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(blog): resolve infinite suspense loop on blog detail page&#10;&#10;- Split getPost into a promise-returning getPostPromise + a PostContent&#10;  component that calls use() inside a Suspense boundary&#10;- Added a per-blogId promise cache (postPromiseCache) so the same&#10;  promise instance is returned across re-renders — previously each&#10;  render created a new fetchQuery promise, causing use() to suspend&#10;  indefinitely&#10;- Suspense now wraps only PostContent instead of the whole page, so&#10;  the header/back-arrow renders immediately while the post loads&#10;- Old getPost async function left in place for reference, unused" />
     <option name="LAST_CHUNK_COMMIT_MESSAGE" value="Content" />
   </component>
 </project>
